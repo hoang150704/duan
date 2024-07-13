@@ -16,6 +16,8 @@ $act=$_GET['act'] ?? '/';
 checkLoginAuthen($act);
 match ($act) {
     '/' =>dashboard(),
+    // test
+    'test-create'=>testCreate(),
     // User
     'user'=>userListAll(),
     'user-detail'=>userShowOne($_GET['id']),
@@ -54,6 +56,13 @@ match ($act) {
     'product-create'=>productCreate(),
     'product-update'=>productUpdate($_GET['id']),
     'product-delete'=>productDelete($_GET['id']),
+
+    // Order
+    'order'=>orderListAll(),
+    'order-detail'=>orderShowOne($_GET['id']),
+    'order-update'=>orderUpdate($_GET['id']),
+    'order-delete'=>orderDelete($_GET['id']),
+
 
 };
     

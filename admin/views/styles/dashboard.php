@@ -18,3 +18,27 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/admin/plugins/summernote/summernote-bs4.min.css">
+    <!--  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Ngày', 'Doanh thu'],
+          <?php foreach($dailyRevenues as $dailyRevenue): ?>
+          ['<?=$dailyRevenue['order_date']?>',  <?=$dailyRevenue['total_revenue']?>],
+          <?php endforeach ?>
+        ]);
+
+        var options = {
+          title: 'Doanh thu theo ngày',
+          hAxis: {title: 'Ngày',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>

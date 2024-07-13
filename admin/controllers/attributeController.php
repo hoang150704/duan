@@ -95,7 +95,6 @@ function attributeCreate()
     $view = 'attributes/create';
 
 
-
     if (!empty($_POST)) {
         $data = [
             "attribute_name" => $_POST['attribute_name'] ?? null,

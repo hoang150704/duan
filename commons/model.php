@@ -56,6 +56,33 @@ if(!function_exists('insert')){
         }
     }
 }
+// create trả về last id
+if(!function_exists('insert_get_last_id')){
+    function insert_get_last_id($tableName, $data=[]){
+        try {
+            //code...
+            $strKeys = get_str_data($data);
+            $params = get_virtual_params($data);
+            
+           
+            $sql = "INSERT INTO $tableName($strKeys) VALUES ($params)";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+           
+            foreach($data as $fieldName=>&$value){
+                $stmt->bindParam(":$fieldName",$value);
+            }
+            $stmt->execute();
+            return $GLOBALS['conn']->lastInsertId();
+
+            
+
+        } catch (\Exception $e) {
+            //throw $th;
+            debug($e);
+        }
+    }
+}
 // LIST
 if(!function_exists('listAll')){
     function listAll($tableName){

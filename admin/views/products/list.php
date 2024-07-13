@@ -53,14 +53,14 @@
                 <tbody>
                   <?php foreach ($products as $product) : ?>
                     <tr>
-                      <td><?= $product['id'] ?></td>
+                      <td><?= $product['product_id'] ?></td>
                       <td><?= $product['product_name'] ?> </td>
                       <td><?= $product['category_name'] ?></td>
                       <td><img src="<?= BASE_URL.$product['main_image']   ?>" alt="" width="50px"> </td>
                       <td>
-                        <a class="btn btn-info btn-sm" href="<?= BASE_URL_ADMIN . '?act=product-detail&id=' . $product['id'] ?>">Chi tiết</a>
-                        <a class="btn btn-warning btn-sm" href="<?= BASE_URL_ADMIN . '?act=product-update&id=' . $product['id'] ?>">Sửa</a>
-                        <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn xóa không!!!!') " href="<?= BASE_URL_ADMIN . '?act=product-delete&id=' . $product['id'] ?>">Xóa</a>
+                        <a class="btn btn-info btn-sm" href="<?= BASE_URL_ADMIN . '?act=product-detail&id=' . $product['product_id'] ?>">Chi tiết</a>
+                        <a class="btn btn-warning btn-sm" href="<?= BASE_URL_ADMIN . '?act=product-update&id=' . $product['product_id'] ?>">Sửa</a>
+                        <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn xóa không!!!!') " href="<?= BASE_URL_ADMIN . '?act=product-delete&id=' . $product['product_id'] ?>">Xóa</a>
                       </td>
                     </tr>
                   <?php endforeach; ?>

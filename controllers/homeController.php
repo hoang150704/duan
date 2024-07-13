@@ -1,5 +1,5 @@
 <?php
 function homeController(){
-    echo "Đây là trang chủ";
+    require_once PATH_VIEW.'layouts/master.php';
 }
 ?>

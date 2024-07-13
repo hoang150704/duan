@@ -112,3 +112,24 @@ if(!function_exists('checkSameUsernameById')){
         }
     }
 }
+// Lấy số người dùng
+if(!function_exists('listAllAccountUser')){
+    function listAllAccountUser(){
+        try {
+            //code...
+           
+            $sql = "SELECT * FROM account WHERE `status`= 1 AND `role` = 0";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+           
+
+            $stmt->execute();
+
+            return $stmt ->fetchAll();
+
+        } catch (\Exception $e) {
+            //throw $th;
+            debug($e);
+        }
+    }
+}
