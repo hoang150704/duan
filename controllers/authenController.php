@@ -23,10 +23,15 @@ function loginUser(){
         header('Location:' . BASE_URL );
         exit();
 }
-    
-function showFormSignupController(){
-    require_once PATH_VIEW . 'authen/register.php';
+function logoutUser(){
+    if(!empty($_SESSION['user'])){
+        session_destroy();
+    }
+    header('Location:'.BASE_URL);
+    exit;
 }
+    
+
 function forgotPassword(){
     if(!empty($_POST)){
        $user = getPasswordByEmail($_POST['email']);
@@ -36,4 +41,24 @@ function forgotPassword(){
 
        }
     }
+}
+// Đăng kí tài khoản
+
+function signupUser(){
+    if(!empty($_POST)){
+        $data = [
+            'fullname' => $_POST['fullname'],
+            'email'=> $_POST['email'],
+            'username'=> $_POST['username'],
+            'password'=> $_POST['password'],
+            'status'=>1,
+            'role'=>0,
+            'create_date'=>date('Y-m-d')
+        ];
+        
+        insert('account',$data);
+        }
+        
+    
+    require_once PATH_VIEW. 'authen/register.php';
 }

@@ -17,11 +17,11 @@
                                 <ul class="dropdown_links">
                                         <li><a href="wishlist.html">Thông tin </a></li>
                                         <li><a href="my-account.html">Đơn hàng </a></li>
-                                        <li><a href="#">Đăng xuất</a></li>
+                                        <li><a href="<?=BASE_URL. '?act=logout' ?>">Đăng xuất</a></li>
                                         
                                     </ul>
                                     <?php else: ?>
-                               <li class="top_links"><a href="#">Đăng nhập </a> </li>
+                               <a href="<?=BASE_URL. '?act=login' ?>" style="color: white; " >Đăng nhập </a>
                                <?php endif ?>
 
                                 </li> 

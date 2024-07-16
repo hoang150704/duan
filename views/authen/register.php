@@ -16,15 +16,26 @@
                     <h2 class="auth-form-title">
                         Create Account
                     </h2>
+                    <div class="auth-external-container">
+                        <div class="auth-external-list">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                        <p class="auth-sgt">or use your email for registration:</p>
+                    </div>
                     <form class="login-form" method="post">
-                        <input type="text" class="auth-form-input" placeholder="Name">
-                        <input type="email" class="auth-form-input" placeholder="Email">
-                        <input type="text" class="auth-form-input" placeholder="User">
+                        <input type="text" class="auth-form-input" placeholder="Họ và tên" name="fullname" >
+                        <input type="email" class="auth-form-input" placeholder="Email" name="email" >
+                        <input type="text" class="auth-form-input" placeholder="Tên đăng nhập" name="username" >
                         <div class="input-icon">
-                            <input type="password" class="auth-form-input" placeholder="Password">
+                            <input type="password" class="auth-form-input" placeholder="Mật khẩu" name="password" >
                             <i class="fa fa-eye show-password"></i>
                         </div>
-                        <input type="password" class="auth-form-input" placeholder="Confirm Password">
+                        <input type="password" class="auth-form-input" placeholder="Xác nhận mật khẩu" name="re-password" >
                         <label class="btn active">
                             <input type="checkbox" name='email1' checked>
                             <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 

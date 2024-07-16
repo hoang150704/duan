@@ -16,7 +16,8 @@ $act=$_GET['act'] ?? '/';
 match ($act) {
     '/' =>homeController(),
     'login'=>showFormLoginController(),
-    'signup'=>showFormSignupController(),
+    'logout'=>logoutUser(),
+    'signup'=>signupUser(),
     
 };
 
