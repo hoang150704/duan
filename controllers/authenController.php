@@ -64,5 +64,7 @@ function signupUser(){
 }
 // Thông tin người dùng
 function infoUser(){
-    require_once PATH_VIEW. 'authen/infor.php';
+    $view = 'authen/info';
+    $style = 'style/info';
+    require_once PATH_VIEW.'layouts/master.php';
 }

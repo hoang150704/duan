@@ -1,93 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/admin/plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/admin/dist/css/adminlte.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/login/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
 </head>
-
-<body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="<?= BASE_URL ?>assets/admin/index2.html" class=""><b>Đăng nhập với Admin</b></a>
+<body>
+    <!-- Form without bootstrap -->
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-action-left">
+                <div class="auth-form-outer">
+                  <div class="d-flex flex-column mt-5">
+                    <h2 class="auth-form-title mt-5">
+                        Đăng nhập
+                    </h2>
+                  </div>
+                    <form class="login-form" method="post">
+                        <input type="text" class="auth-form-input" placeholder="username" name="username" >
+                        <input type="password" class="auth-form-input" placeholder="Password" name="password" >
+                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
+                            <span> I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
+                        </label>
+                        <div class="footer-action">
+                            <input type="submit" value="Đăng nhập" class="auth-submit">
+                            <a href="login.html" class="auth-btn-direct">Đăng kí</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="auth-action-right">
+                <div class="auth-image">
+                    <img src="<?=BASE_URL?>assets/login/assets/vector.jpg" alt="login">
+                </div>
+            </div>
+        </div>
     </div>
-    <?php if (isset($_SESSION['errors'])) : ?>
-      <div class="alert alert-danger">
-        
-          <p><?= $_SESSION['errors'] ?></p>
-
-        
-      </div>
-      <?php unset($_SESSION['errors']) ?>
-    <?php endif ?>
-    <!-- /.login-logo -->
-    <div class="card">
-      <div class="card-body login-card-body d-flex justify-conten-center flex-column">
-        <img height="50px" class="mb-4 img-fluid" src="<?= BASE_URL . 'uploads/logoHDT1.png' ?>" alt="">
-
-        <form action="" method="post">
-          <div class="input-group mb-3">
-            <input type="username" name="username" class="form-control" placeholder="Username">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Nhớ thông tin
-                </label>
-              </div>
-            </div>
-            <!-- /.col -->
-            <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-
-
-        <!-- /.social-auth-links -->
-
-        <p class="mb-1">
-          <a href="forgot-password.html">Quên mật khẩu ?</a>
-        </p>
-
-      </div>
-      <!-- /.login-card-body -->
-    </div>
-  </div>
-  <!-- /.login-box -->
-
-  <!-- jQuery -->
-  <script src="<?= BASE_URL ?>assets/admin/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="<?= BASE_URL ?>assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?= BASE_URL ?>assets/admin/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="<?=BASE_URL?>assets/login/js/common.js"></script>
 </body>
-
 </html>

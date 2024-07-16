@@ -19,7 +19,7 @@
     
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/user/theme_shop/assets/css/style.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -36,79 +36,8 @@
     <?php require_once PATH_VIEW. 'layouts/partials/header.php'; ?>
     <!--header area end-->
 
-    <!--slider area start-->
-    <div class="slider_area slider_style home_three_slider owl-carousel">
-        <div class="single_slider" data-bgimg="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/slider4.jpg">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="slider_content content_one">
-                            <img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/content3.png" alt="">
-                            <p>the wooboom clothing summer collection is back at half price</p>
-                            <a href="shop.html">Discover Now</a>
-                        </div>    
-                    </div>
-                </div>
-            </div>    
-        </div>
-        <div class="single_slider" data-bgimg="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/slider5.jpg">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="slider_content content_two">
-                            <img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/content4.png" alt="">
-                            <p>the wooboom clothing summer collection is back at half price</p>
-                            <a href="shop.html">Discover Now</a>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="single_slider" data-bgimg="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/slider6.jpg">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="slider_content content_three">
-                            <img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/slider/content5.png" alt="">
-                            <p>the wooboom clothing summer collection is back at half price</p>
-                            <a href="shop.html">Discover Now</a>
-                        </div>    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!--slider area end-->
 
-    <!--banner area start-->
-    <div class="banner_section banner_section_three">
-        <div class="container-fluid">
-            <div class="row ">
-               <div class="col-lg-4 col-md-6">
-                    <div class="banner_area">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/bg/banner8.jpg" alt="#"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner_area">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/bg/banner9.jpg" alt="#"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner_area bottom">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/bg/banner10.jpg" alt="#"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--banner area end-->
     <!-- content -->
     <?php require_once PATH_VIEW. $view . '.php'; ?>
 
@@ -124,8 +53,8 @@
 
 <!-- Main JS -->
 <script src="<?= BASE_URL ?>assets/user/theme_shop/assets/js/main.js"></script>
-
-
+<!--  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 

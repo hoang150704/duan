@@ -13,20 +13,12 @@
         <div class="auth-container">
             <div class="auth-action-left">
                 <div class="auth-form-outer">
+                <div class="d-flex flex-column">
+
                     <h2 class="auth-form-title">
-                        Create Account
+                        Đăng kí
                     </h2>
-                    <div class="auth-external-container">
-                        <div class="auth-external-list">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                        <p class="auth-sgt">or use your email for registration:</p>
-                    </div>
+                  </div>
                     <form class="login-form" method="post">
                         <input type="text" class="auth-form-input" placeholder="Họ và tên" name="fullname" >
                         <input type="email" class="auth-form-input" placeholder="Email" name="email" >
