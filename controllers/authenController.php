@@ -62,3 +62,7 @@ function signupUser(){
     
     require_once PATH_VIEW. 'authen/register.php';
 }
+// Thông tin người dùng
+function infoUser(){
+    require_once PATH_VIEW. 'authen/infor.php';
+}

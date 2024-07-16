@@ -63,7 +63,7 @@
                                                  <input type="number" class="form-control" id="quantity" placeholder="Số lượng sản phẩm" name="quantity" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['product_name'] : '' ?>">
                                                  <span></span>
                                              </div>
-                                             <div class="form-group row" id="class-variant">
+                                             <!-- <div class="form-group row" id="class-variant">
                                                  <div class="col-3">
                                                      <label for="">Tên thuộc tính</label>
                                                      <input type="text" id="form-control" placeholder="Nhập tên thuộc tính">
@@ -73,14 +73,11 @@
                                                      <label for="">Giá trị thuộc tính</label>
                                                      <div class="variant_input">
                                                          <ul>
-                                                             <!-- <li>Html <div class="remove"></div></li>
-                                                            <li>Css  <div class="remove"></div></li>
-                                                            <li>Php  <div class="remove"></div></li> -->
                                                              <input type="text" id="inputVariant" class="" placeholder="">
                                                          </ul>
                                                      </div>
                                                  </div>
-                                             </div>
+                                             </div> -->
                                          </div>
                                          <div id="product_variant" style="display: none;">
                                              <div class="form-group">

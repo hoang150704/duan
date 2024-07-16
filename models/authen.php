@@ -43,3 +43,4 @@ if(!function_exists('getPasswordByEmail')){
         }
     }
 }
+// Lấy thông tin người dùng

@@ -116,6 +116,7 @@ function productCreate()
                     'attribute_value_id' => 0,
         
                 ];
+                insert('product_variant',$variant);
                 
             }else{
                 

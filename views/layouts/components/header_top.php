@@ -15,7 +15,7 @@
                                 <?php if(!empty($_SESSION['user'])): ?>
                                 <li class="top_links"><a href="#"><?=$_SESSION['user']['fullname'] ?> <i class="ion-chevron-down"></i></a>
                                 <ul class="dropdown_links">
-                                        <li><a href="wishlist.html">Thông tin </a></li>
+                                        <li><a href="<?=BASE_URL. '?act=info' ?>">Thông tin </a></li>
                                         <li><a href="my-account.html">Đơn hàng </a></li>
                                         <li><a href="<?=BASE_URL. '?act=logout' ?>">Đăng xuất</a></li>
                                         

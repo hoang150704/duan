@@ -18,7 +18,7 @@ match ($act) {
     'login'=>showFormLoginController(),
     'logout'=>logoutUser(),
     'signup'=>signupUser(),
-    
+    'info'=>infoUser(),
 };
 
 // 
