@@ -63,6 +63,24 @@
                                                  <input type="number" class="form-control" id="quantity" placeholder="Số lượng sản phẩm" name="quantity" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['product_name'] : '' ?>">
                                                  <span></span>
                                              </div>
+                                             <div class="form-group row" id="class-variant">
+                                                 <div class="col-3">
+                                                     <label for="">Tên thuộc tính</label>
+                                                     <input type="text" id="form-control" placeholder="Nhập tên thuộc tính">
+                                                 </div>
+                                                 <div class="col-1"></div>
+                                                 <div class="col-8" id="group">
+                                                     <label for="">Giá trị thuộc tính</label>
+                                                     <div class="variant_input">
+                                                         <ul>
+                                                             <!-- <li>Html <div class="remove"></div></li>
+                                                            <li>Css  <div class="remove"></div></li>
+                                                            <li>Php  <div class="remove"></div></li> -->
+                                                             <input type="text" id="inputVariant" class="" placeholder="">
+                                                         </ul>
+                                                     </div>
+                                                 </div>
+                                             </div>
                                          </div>
                                          <div id="product_variant" style="display: none;">
                                              <div class="form-group">
@@ -137,7 +155,7 @@
                              <div class="card-footer ">
                                  <button type="submit" class="btn btn-primary " name="submit">Submit</button>
                              </div>
-                             
+
                          </form>
                          <!-- END FORM -->
 
@@ -175,54 +193,40 @@
                  productVariant.style.display = 'none';
              }
          });
+     })
+ </script>
+ <script>
+     let ul = document.querySelector('.variant_input ul');
+     let inp = document.querySelector('.variant_input ul input');
+     let variants = ['HTML', 'CSS', 'PHP'];
 
-         addAttributeButton.addEventListener('click', function() {
-             const newAttributeContainer = document.createElement('div');
-             newAttributeContainer.className = 'form-group';
-             newAttributeContainer.innerHTML = `
-                <div class="row form-group" style="margin: 0 0px 0 0px;">
-                    <input type="text" value="Thuộc tính" class="col-3 form-control" placeholder="Thuộc tính">
-                    <p class="col-1 "></p>
-                    <input type="text" class="col-7 form-control" style="padding: 6px;" placeholder="Giá trị thuộc tính">
-                    <button type="button" class="col-1 btn btn-danger btn-sm remove-attribute">X</button>
-                </div>
-            `;
-             variantContainer.appendChild(newAttributeContainer);
-
-             newAttributeContainer.querySelector('.remove-attribute').addEventListener('click', function() {
-                 variantContainer.removeChild(newAttributeContainer);
-             });
+     function showVariants() {
+         document.querySelectorAll('.variant_input li').forEach(li => li.remove());
+         variants.forEach((value, key) => {
+             let newLi = document.createElement('li');
+             newLi.innerText = value;
+             let newRemove = document.createElement('div');
+             newRemove.classList.add('remove');
+             newRemove.setAttribute('onclick', `removeItem(${key})`);
+             newLi.appendChild(newRemove);
+             ul.appendChild(newLi);
          });
+     };
+     showVariants();
 
-         const attributeSelect = document.getElementById('exampleInputcategory_id1');
-         attributeSelect.addEventListener('change', function() {
-             const selectedOptions = Array.from(attributeSelect.selectedOptions).map(option => option.value);
-             const existingInputs = Array.from(variantContainer.children).filter(child => child.id.startsWith('attribute_'));
-
-             existingInputs.forEach(input => {
-                 const attributeId = input.id.split('_')[1];
-                 if (!selectedOptions.includes(attributeId)) {
-                     variantContainer.removeChild(input);
-                 }
-             });
-
-             selectedOptions.forEach(value => {
-                 if (!document.getElementById(`attribute_${value}`)) {
-                     const option = attributeSelect.querySelector(`option[value="${value}"]`);
-                     const attributeContainer = document.createElement('div');
-                     attributeContainer.className = 'form-group';
-                     attributeContainer.id = `attribute_${value}`;
-                     attributeContainer.innerHTML = `
-                        
-                    `;
-                     variantContainer.appendChild(attributeContainer);
-
-                     attributeContainer.querySelector('.remove-attribute').addEventListener('click', function() {
-                         variantContainer.removeChild(attributeContainer);
-                         attributeSelect.querySelector(`option[value="${attributeId}"]`).selected = false;
-                     });
-                 }
-             });
-         });
-     });
+     function removeItem(key) {
+         delete variants[key];
+         showVariants();
+     }
+     inp.addEventListener('keyup', function(event) {
+        if (event.key === ',') {
+        let value = this.value.slice(0, -1).trim(); // Xóa dấu phẩy và khoảng trắng dư thừa
+        if (value && !variants.includes(value)) {
+            variants.push(value);
+            showVariants();
+             }
+             this.value = '';
+         }
+         
+     })
  </script>

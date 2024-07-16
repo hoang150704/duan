@@ -42,25 +42,25 @@
                                         <h5><b>Thông tin người nhận:</b></h5>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Họ và tên</label>
-                                            <input type="text" class="form-control" id="exampleInputUsername1" name="order_account_name" value="<?= $order['order_account_name'] ?>">
+                                            <input type="text" class="form-control" id="order_account_name" name="order_account_name" value="<?= $order['order_account_name'] ?>">
                                             <span></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Số điện thoại</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="order_phone" value="<?= $order['order_phone'] ?>">
+                                            <input type="text" class="form-control" id="order_phone" placeholder="Số điện thoại" name="order_phone" value="<?= $order['order_phone'] ?>">
                                             <span></span>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Địa chỉ</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="example@gmail.com" name="order_address" value="<?= $order['order_address'] ?>">
+                                            <input type="text" class="form-control" id="order_address" placeholder="Địa chỉ" name="order_address" value="<?= $order['order_address'] ?>">
                                             <span></span>
                                         </div>
                                     </div>
                                     <div class="col-6 border">
                                         <h5><b>Chung:</h5>
                                         <div class="form-group">
-                                            <label for="exampleInputRole1">Trạng thái đơn hàng</label>
-                                            <select name="status_id" id="exampleInputRole1" class="form-control">
+                                            <label for="status_id">Trạng thái đơn hàng</label>
+                                            <select name="status_id" id="status_id" class="form-control">
                                                 <?php foreach ($status_orders as $status_order) : ?>
                                                     <option value="<?= $status_order['id'] ?>" <?php if ($order['status_id'] == $status_order['id']) echo 'selected'; ?>><?= $status_order['status_order_name'] ?></option>
                                                 <?php endforeach ?>
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputAddress1">Ghi chú</label>
-                                            <input type="text" class="form-control" id="exampleInputAddress1" placeholder="Ghi chú ....." name="note" value="<?= $order['note'] ?>">
+                                            <input type="text" class="form-control" id="note" placeholder="Ghi chú ....." name="note" value="<?= $order['note'] ?>">
                                             <span></span>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                                 <tr class="bg-light">
                                                     <td><?= $detail['product_name'] ?></td>
                                                     <td><?= $detail['product_price'] ?> VND</td>
-                                                    <td><input type="number" name="detail_quantity[]" id="quantity<?= $i ?>" value="<?= $detail['detail_quantity'] ?>" onchange="updateTotal(<?= $i ?>, <?= $detail['product_price'] ?>)"></td>
+                                                    <td><input  type="number" name="detail_quantity[]" id="quantity<?= $i ?>" value="<?= $detail['detail_quantity'] ?>" onchange="updateTotal(<?= $i ?>, <?= $detail['product_price'] ?>)"></td>
                                                     <td id="total<?= $i ?>"> <?= $detail['product_price'] * $detail['detail_quantity'] ?> VND</td>
                                                 </tr>
                                             <?php
@@ -166,4 +166,25 @@ function updateSubtotal() {
 
 // Update the total values initially
 updateSubtotal();
+
+</script>
+<select name="status_id" id="status_id" class="form-control">
+    <?php foreach ($status_orders as $status_order) : ?>
+        <option value="<?= $status_order['id'] ?>" <?php if ($order['status_id'] == $status_order['id']) echo 'selected'; ?>><?= $status_order['status_order_name'] ?></option>
+    <?php endforeach ?>
+</select>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var statusSelect = document.getElementById('status_id');
+    var currentStatus = <?= $order['status_id'] ?>;
+    
+    if (currentStatus == 3) { // Đơn hàng đã hoàn thành
+        for (var i = 0; i < statusSelect.options.length; i++) {
+            if (statusSelect.options[i].value != 3) {
+                statusSelect.options[i].disabled = true;
+            }
+        }
+    }
+});
 </script>

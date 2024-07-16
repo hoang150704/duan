@@ -157,7 +157,6 @@ function userUpdate($id)
     if (!empty($_POST)) {
         $data = [
             "username" => $_POST['username'] ?? $user['username'],
-            "password" => $_POST['password'] ?? $user['password'],
             "email" => $_POST['email'] ?? $user['email'],
             "phone" => $_POST['phone'] ?? $user['phone'],
             "fullname" => $_POST['fullname'] ?? $user['fullname'],

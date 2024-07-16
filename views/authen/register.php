@@ -16,20 +16,10 @@
                     <h2 class="auth-form-title">
                         Create Account
                     </h2>
-                    <div class="auth-external-container">
-                        <div class="auth-external-list">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                        <p class="auth-sgt">or use your email for registration:</p>
-                    </div>
-                    <form class="login-form">
+                    <form class="login-form" method="post">
                         <input type="text" class="auth-form-input" placeholder="Name">
                         <input type="email" class="auth-form-input" placeholder="Email">
+                        <input type="text" class="auth-form-input" placeholder="User">
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Password">
                             <i class="fa fa-eye show-password"></i>

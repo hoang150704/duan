@@ -30,7 +30,7 @@ function productCreate()
 {
     $script = 'create';
     $script2 = 'tinyMCE';
-    $style = 'create';
+    $style = 'createproduct';
     $title = 'Thêm sản phẩm';
     $view = 'products/create';
     // Lấy danh mục
@@ -45,7 +45,7 @@ function productCreate()
         $listAll[$attribute['id']] = listAllAttributeById('attribute_value',$attribute['id']);
     }
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST)) {
         $type_product = $_POST['type_product'];
         // Sản phẩm chính
         $data = [
@@ -55,6 +55,7 @@ function productCreate()
             'main_image' => get_file_upload('main_image'),
             'status' => 1
         ];
+        
         // validate sản phẩm chính
         validateProductCreate($data, $valuesId);
         // Ảnh đại diện sản phẩm
@@ -92,20 +93,8 @@ function productCreate()
                 }
             // Xử lí bảng sản phẩm biến thể
             
-            if ($type_product == 1) { 
-                $product_variant_id =$product_id . 'a' ;       
-                $variant = [
-                    'product_id' => $product_id,
-                    'product_variant_id' => $product_variant_id,
-                    'attribute_id' => 0,
-                    'attribute_value_id' => 0,
-        
-                ];
-                
-                insert('product_variant',$variant);  
-                
+            if ($type_product == 1) {    
                 $detail = [
-                    'product_variant_id'=>$product_variant_id,
                     'quantity' => $_POST['quantity'] ?? null,
                     'price' => $_POST['price'] ?? null,
                     'sale_price' => $_POST['sale_price'] ?? null
@@ -119,8 +108,15 @@ function productCreate()
                 if(empty($detail['quantity'])){
                     $detail['quantity'] =0;
                 }
-                insert('products_variant_detail',$detail);
-            
+                $id_lookup = insert_get_last_id('product_lookup',$detail);  
+                $variant = [
+                    'product_id' => $product_id,
+                    'product_variant_id'=> $id_lookup,
+                    'attribute_id' => 0,
+                    'attribute_value_id' => 0,
+        
+                ];
+                
             }else{
                 
             }

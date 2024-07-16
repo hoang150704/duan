@@ -48,22 +48,7 @@
                                         <p><?= $user['username'] ?></p>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <p>Mật khẩu</p>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <p class="password_user mr-4"  >********</p>
 
-                                        <!-- Nút để hiện/ẩn mật khẩu -->
-                                        <button id="togglePasswordBtn" class="btn btn-primary btn-sm ">Hiện mật khẩu</button>
-                                        
-                                        </div>
-                                        
-
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>
                                         <p>Email</p>

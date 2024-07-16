@@ -4,8 +4,8 @@
                     <div class="col-lg-7 col-md-12">
                         <div class="welcome_text">
                            <ul>
-                               <li><span>Free Delivery:</span> Take advantage of our time to save event</li>
-                               <li><span>Free Returns *</span> Satisfaction guaranteed</li>
+                               <li><span>Số điện thoại:</span> 0796385112</li>
+                               <li><span>Địa chỉ: </span> 68 phố Nhổn, Tây Tựu, Bắc Từ Liêm, Hà nội</li>
                            </ul>
                         </div>
                     </div>
@@ -13,16 +13,17 @@
                         <div class="top_right text-right">
                             <ul>
                                 <?php if(!empty($_SESSION['user'])): ?>
-                                    <li class="top_links"><a href="#"><?=$_SESSION['user']['fullname'] ?> <i class="ion-chevron-down"></i></a>
-                                    <?php else: ?>
-                               <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
-                               <?php endif ?>
-                                    <ul class="dropdown_links">
-                                        <li><a href="wishlist.html">My Wish List </a></li>
-                                        <li><a href="my-account.html">My Account </a></li>
-                                        <li><a href="#">Sign In</a></li>
-                                        <li><a href="compare.html">Compare Products  </a></li>
+                                <li class="top_links"><a href="#"><?=$_SESSION['user']['fullname'] ?> <i class="ion-chevron-down"></i></a>
+                                <ul class="dropdown_links">
+                                        <li><a href="wishlist.html">Thông tin </a></li>
+                                        <li><a href="my-account.html">Đơn hàng </a></li>
+                                        <li><a href="#">Đăng xuất</a></li>
+                                        
                                     </ul>
+                                    <?php else: ?>
+                               <li class="top_links"><a href="#">Đăng nhập </a> </li>
+                               <?php endif ?>
+
                                 </li> 
                             </ul>
                         </div>   

@@ -69,11 +69,7 @@
                                      <input type="text" class="form-control" id="exampleInputUsername1" name="username" value="<?= $user['username'] ?>">
                                      <span></span>
                                  </div>
-                                 <div class="form-group">
-                                     <label for="exampleInputPassword1">Mật khẩu</label>
-                                     <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" value="<?= $user['password'] ?>">
-                                     <span></span>
-                                 </div>
+
 
                                  <div class="form-group">
                                      <label for="exampleInputEmail1">Email</label>
