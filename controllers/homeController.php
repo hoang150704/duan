@@ -2,6 +2,7 @@
 function homeController(){
 
     $view = 'home';
+    $style = 'style/home';
     $listAoThun = listProductByCategoryLimit8(1);
     $listAoSoMi = listProductByCategoryLimit8(2);
     $listAoPolo = listProductByCategoryLimit8(3);

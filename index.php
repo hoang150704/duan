@@ -15,10 +15,13 @@ require_file(PATH_MODEL);
 $act=$_GET['act'] ?? '/';
 match ($act) {
     '/' =>homeController(),
+    // Tài khoản
     'login'=>showFormLoginController(),
     'logout'=>logoutUser(),
     'signup'=>signupUser(),
     'info'=>infoUser(),
+    // Sản phẩm
+    'product-detail'=>productDetail($_GET['id']),
 };
 
 // 
