@@ -33,6 +33,8 @@ function productCreate()
     $style = 'createproduct';
     $title = 'Thêm sản phẩm';
     $view = 'products/create';
+
+
     // Lấy danh mục
     $categories = listAll('category');
     for ($i = 0; $i < count($categories); $i++) {
@@ -40,11 +42,9 @@ function productCreate()
     }
     // List thuộc tính
     $attributes = listAll('attribute');
-    
-    foreach($attributes as $attribute){
-        $listAll[$attribute['id']] = listAllAttributeById('attribute_value',$attribute['id']);
+    foreach ($attributes as $attribute) {
+        $listAllAttributeValues[$attribute['id']] = listAllAttributeById('attribute_value', $attribute['id']);
     }
-    
     if (!empty($_POST)) {
         $type_product = $_POST['type_product'];
         // Sản phẩm chính
@@ -55,7 +55,7 @@ function productCreate()
             'main_image' => get_file_upload('main_image'),
             'status' => 1
         ];
-        
+
         // validate sản phẩm chính
         validateProductCreate($data, $valuesId);
         // Ảnh đại diện sản phẩm
@@ -72,54 +72,71 @@ function productCreate()
             // XỬ lí nhiều hình ảnh sản phẩm được thêm
             $files = get_file_upload('image');
             $fileNameArr = $files['name'];
-            if( $files['size'][0] >0){
-                for($i = 0; $i < count($fileNameArr); $i++){
-                    $file=[
-                        'name'=>$files['name'][$i],
+            if ($files['size'][0] > 0) {
+                for ($i = 0; $i < count($fileNameArr); $i++) {
+                    $file = [
+                        'name' => $files['name'][$i],
                         'type' => $files['type'][$i],
                         'tmp_name' => $files['tmp_name'][$i],
                         'error' => $files['error'][$i],
                         'size' => $files['size'][$i]
                     ];
-                    $fileUpdates[]=uploadFlie($file,'uploads/products/');
-              
-                }}
-                foreach($fileUpdates as $fileUpdate){
-                    $image =[
-                        'product_id'=> $product_id,
-                        'image'=>$fileUpdate
-                    ];
-                    insert('image',$image);
+                    $fileUpdates[] = uploadFlie($file, 'uploads/products/');
                 }
+            }
+            foreach ($fileUpdates as $fileUpdate) {
+                $image = [
+                    'product_id' => $product_id,
+                    'image' => $fileUpdate
+                ];
+                insert('image', $image);
+            }
             // Xử lí bảng sản phẩm biến thể
-            
-            if ($type_product == 1) {    
+
+            if ($type_product == 1) {
                 $detail = [
                     'quantity' => $_POST['quantity'] ?? null,
                     'price' => $_POST['price'] ?? null,
                     'sale_price' => $_POST['sale_price'] ?? null
                 ];
-                if(empty($detail['price'])){
-                    $detail['price'] =0;
+                if (empty($detail['price'])) {
+                    $detail['price'] = 0;
                 }
-                if(empty($detail['sale_price'])){
-                    $detail['sale_price'] =0;
+                if (empty($detail['sale_price'])) {
+                    $detail['sale_price'] = 0;
                 }
-                if(empty($detail['quantity'])){
-                    $detail['quantity'] =0;
+                if (empty($detail['quantity'])) {
+                    $detail['quantity'] = 0;
                 }
-                $id_lookup = insert_get_last_id('product_lookup',$detail);  
+                $id_lookup = insert_get_last_id('product_lookup', $detail);
                 $variant = [
                     'product_id' => $product_id,
-                    'product_variant_id'=> $id_lookup,
+                    'product_variant_id' => $id_lookup,
                     'attribute_id' => 0,
                     'attribute_value_id' => 0,
-        
+
                 ];
-                insert('product_variant',$variant);
-                
-            }else{
-                
+                insert('product_variant', $variant);
+            } else {
+                if (isset($_POST['variants'])) {
+                    $variants2 = $_POST['variants'];}
+                    foreach ($variants2 as $idPrefix => $variant2){
+                        $lookup = [
+                            'price'=>$variant2['price'],
+                            'sale_price'=>$variant2['sale_price'],
+                            'quantity'=>$variant2['quantity'],
+                        ];
+                        $lookup_id = insert_get_last_id('product_lookup',$lookup);
+                        $attributes2 = $variant2['attributes'];
+                        foreach($attributes2 as $attributes2){
+                            $variant = [
+                                'product_id' => $product_id,
+                                'product_variant_id' => $lookup_id,
+                                'attribute_value_id' => $attributes2,
+                            ];
+                            insert('product_variant',$variant);
+                        }
+                    }
             }
 
             $GLOBALS['conn']->commit();

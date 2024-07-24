@@ -184,6 +184,17 @@
                         </p>
                     </a>
                 </li>
+                <!-- Bình luận -->
+                <li class="nav-item">
+                    <a href="<?= BASE_URL_ADMIN . '?act=comments' ?>" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                        <p>
+                            Bình luận
+
+                        </p>
+                    </a>
+
+                </li>
 
             </ul>
         </nav>

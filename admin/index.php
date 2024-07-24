@@ -62,6 +62,11 @@ match ($act) {
     'order-detail'=>orderShowOne($_GET['id']),
     'order-update'=>orderUpdate($_GET['id']),
     'order-delete'=>orderDelete($_GET['id']),
+    // Đánh giá sản phẩm
+    'comments'=>commentListAll(),
+    'comment-detail'=>commentShowOne($_GET['id']),
+    'comment-reply'=>commentReply($_GET['id']),
+    'comment-delete'=>commentDelete($_GET['id']),
 
 
 };

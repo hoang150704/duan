@@ -17,34 +17,35 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-            <?php if (isset($_SESSION['success'])) : ?>
+              <?php if (isset($_SESSION['success'])) : ?>
                 <div class="d-flex align-items-center alert alert-success">
-                
+
                   <i class="fas fa-check-circle"></i>
-                  <p class="p-2 m-0"><?=$_SESSION['success'] ?></p>
-                  
+                  <p class="p-2 m-0"><?= $_SESSION['success'] ?></p>
+
                 </div>
 
                 <?php unset($_SESSION['success']) ?>
-                <?php endif ?>
-                <!--  -->
-                <?php if (isset($_SESSION['delete'])) : ?>
+              <?php endif ?>
+              <!--  -->
+              <?php if (isset($_SESSION['delete'])) : ?>
                 <div class="d-flex align-items-center alert alert-success">
-                
+
                   <i class="fas fa-check-circle"></i>
-                  <p class="p-2 m-0"><?=$_SESSION['delete'] ?></p>
-                  
+                  <p class="p-2 m-0"><?= $_SESSION['delete'] ?></p>
+
                 </div>
 
                 <?php unset($_SESSION['delete']) ?>
-                <?php endif ?>
+              <?php endif ?>
 
               <table id="example2" class="table table-bordered ">
                 <thead>
                   <tr>
+                    <th>Hành động</th>
                     <th>Id</th>
                     <th>Tên trạng thái đơn hàng</th>
-                    <th>Hành động</th>
+
                   </tr>
                 </thead>
 
@@ -52,13 +53,14 @@
                 <tbody>
                   <?php foreach ($status_orders as $status_order) : ?>
                     <tr>
-                      <td><?= $status_order['id'] ?></td>
-                      <td><?= $status_order['status_order_name'] ?> </td>
                       <td>
-                      <a class="btn btn-success btn-sm" href="<?= BASE_URL_ADMIN . '?act=status_order-detail&id=' . $status_order['id'] ?>">Chi tiết</a>
+                        <a class="btn btn-success btn-sm" href="<?= BASE_URL_ADMIN . '?act=status_order-detail&id=' . $status_order['id'] ?>">Chi tiết</a>
                         <a class="btn btn-warning btn-sm" href="<?= BASE_URL_ADMIN . '?act=status_order-update&id=' . $status_order['id'] ?>">Sửa</a>
                         <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn xóa không!!!!') " href="<?= BASE_URL_ADMIN . '?act=status_order-delete&id=' . $status_order['id'] ?>">Xóa</a>
                       </td>
+                      <td><?= $status_order['id'] ?></td>
+                      <td><?= $status_order['status_order_name'] ?> </td>
+
                     </tr>
                   <?php endforeach; ?>
 

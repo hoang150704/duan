@@ -20,7 +20,7 @@
                          </div>
                          <!-- /.card-header -->
                          <!-- form start -->
-                         <form method="POST" enctype="multipart/form-data">
+                         <form method="POST" enctype="multipart/form-data" >
                              <div class="card-body">
                                  <?php if (isset($_SESSION['errors'])) : ?>
                                      <div class="alert alert-danger">
@@ -63,7 +63,7 @@
                                                  <input type="number" class="form-control" id="quantity" placeholder="Số lượng sản phẩm" name="quantity" value="<?= isset($_SESSION['data']) ? $_SESSION['data']['product_name'] : '' ?>">
                                                  <span></span>
                                              </div>
-                                             <div class="form-group row" id="class-variant">
+                                             <!-- <div class="form-group row" id="class-variant">
                                                  <div class="col-3">
                                                      <label for="">Tên thuộc tính</label>
                                                      <input type="text" id="form-control" placeholder="Nhập tên thuộc tính">
@@ -77,21 +77,25 @@
                                                          </ul>
                                                      </div>
                                                  </div>
-                                             </div>
+                                             </div> -->
                                          </div>
                                          <div id="product_variant" style="display: none;">
                                              <div class="form-group">
                                                  <label for="exampleInputcategory_id1">Thuộc tính</label>
-                                                 <select name="attribute_id" id="exampleInputcategory_id1" class="form-control" multiple>
+                                                 <select name="attribute_id" id="attributes" class="form-control" multiple>
                                                      <?php foreach ($attributes as $attribute) : ?>
                                                          <option value="<?= $attribute['id'] ?>"><?= $attribute['attribute_name'] ?></option>
                                                      <?php endforeach ?>
                                                  </select>
-                                                 <p id="addAttribute" class="btn btn-success mt-3" style="display: none;">Thêm thuộc tính</p>
+                                                 <p id="addAttribute" class="btn btn-success mt-3">Cập nhật</p>
                                              </div>
+                                             
+
+                                             <div id="dynamicFieldsContainer"></div>
+
+                                             <div id="variantsContainer"></div>
                                          </div>
-                                         <div id="variant">
-                                         </div>
+
                                      </div>
                                      <div class="col-3 border rounded">
                                          <div class="form-group">
@@ -167,19 +171,17 @@
          </div><!-- /.container-fluid -->
 
      </section>
-     <?php unset($_SESSION['data']) ?>
+ 
      <!-- /.content -->
  </div>
+
+  
 
  <script>
      document.addEventListener('DOMContentLoaded', function() {
          const typeSelect = document.getElementById('type');
          const productNoVariant = document.getElementById('product_no_variant');
          const productVariant = document.getElementById('product_variant');
-         const addAttributeButton = document.getElementById('addAttribute');
-         const variantContainer = document.getElementById('variant');
-         const attributes = <?php echo json_encode($listAll); ?>;
-         console.log(attributes);
 
          typeSelect.addEventListener('change', function() {
              if (this.value == '2') {
@@ -190,41 +192,5 @@
                  productVariant.style.display = 'none';
              }
          });
-     })
- </script>
- <script>
-     let ul = document.querySelector('.variant_input ul');
-     let inp = document.querySelector('.variant_input ul input');
-     let variants = ['HTML', 'CSS', 'PHP'];
-     
-
-     function showVariants() {
-         document.querySelectorAll('.variant_input li').forEach(li => li.remove());
-         variants.forEach((value, key) => {
-             let newLi = document.createElement('li');
-             newLi.innerText = value;
-             let newRemove = document.createElement('div');
-             newRemove.classList.add('remove');
-             newRemove.setAttribute('onclick', `removeItem(${key})`);
-             newLi.appendChild(newRemove);
-             ul.appendChild(newLi);
-         });
-     };
-     showVariants();
-
-     function removeItem(key) {
-         delete variants[key];
-         showVariants();
-     }
-     inp.addEventListener('keyup', function(event) {
-        if (event.key === ',') {
-        let value = this.value.slice(0, -1).trim(); // Xóa dấu phẩy và khoảng trắng dư thừa
-        if (value && !variants.includes(value)) {
-            variants.push(value);
-            showVariants();
-             }
-             this.value = '';
-         }
-         
      })
  </script>

@@ -1,5 +1,6 @@
 <?php
 $listAllCategories = listAll('category');
+
 ?>
 <div class="header_bottom sticky-header">
             <div class="container">
@@ -13,7 +14,7 @@ $listAllCategories = listAll('category');
                                         <li><a href="#">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <?php foreach($listAllCategories as $category): ?>
-                                                <li><a href="about.html"><?=$category['category_name'] ?></a></li>
+                                                <li><a href="<?= BASE_URL .'?act=product-list&id='.$category['id']?>"><?=$category['category_name'] ?></a></li>
                                                 <?php endforeach ?>
                                             </ul>
                                         </li>

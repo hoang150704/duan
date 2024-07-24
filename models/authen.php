@@ -44,3 +44,25 @@ if(!function_exists('getPasswordByEmail')){
     }
 }
 // Lấy thông tin người dùng
+if(!function_exists('checkSameEmailUserById')){
+    function checkSameEmailUserById($tableName,$email,$id){
+        try {
+            //Nếu không trùng trả về true
+           
+            $sql = "SELECT * FROM $tableName WHERE email = :email  AND id <> :id  LIMIT 1" ;
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+            $stmt->bindParam(":email",$email);
+            $stmt->bindParam(":id",$id);
+
+            $stmt->execute();
+
+            $data = $stmt ->fetch();
+            return empty($data) ? true : false;
+
+        } catch (\Exception $e) {
+            //throw $th;
+            debug($e);
+        }
+    }
+}

@@ -112,6 +112,9 @@ function validateCreate($data, $repassword)
         $errors[] = 'Mật khẩu ít nhất phải dài 8 kí tự và không được quá 20 kí tự';
     } else if (regaxVietnamese($data['password'])) {
         $errors[] = 'Mật khẩu không được có dấu';
+    }
+    elseif (preg_match('/\s/', $data['password'])) {
+        $errors[] = 'Mật khẩu không được có khoảng trắng';
     } elseif ($data['password'] != $repassword) {
         $errors[] = 'Nhập lại mật khẩu phải giống nhau mật khẩu';
     }

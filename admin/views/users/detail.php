@@ -62,7 +62,7 @@
                                         <p>Số điện thoại</p>
                                     </td>
                                     <td>
-                                        <p><?= $user['phone'] ?></p>
+                                        <p><?=  $user['phone'] ?></p>
                                     </td>
                                 </tr>
                                 <tr>

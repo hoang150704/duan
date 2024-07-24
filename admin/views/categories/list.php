@@ -42,9 +42,10 @@
               <table id="example2" class="table table-bordered ">
                 <thead>
                   <tr>
+                  <th>Hành động</th>
                     <th>Id</th>
                     <th>Tên danh mục</th>
-                    <th>Hành động</th>
+                    
                   </tr>
                 </thead>
 
@@ -52,13 +53,14 @@
                 <tbody>
                   <?php foreach ($categories as $category) : ?>
                     <tr>
-                      <td><?= $category['id'] ?></td>
-                      <td><?= $category['category_name'] ?> </td>
-                      <td>
+                    <td>
                       <a class="btn btn-success btn-sm" href="<?= BASE_URL_ADMIN . '?act=category-detail&id=' . $category['id'] ?>">Chi tiết</a>
                         <a class="btn btn-warning btn-sm" href="<?= BASE_URL_ADMIN . '?act=category-update&id=' . $category['id'] ?>">Sửa</a>
                         <a class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn xóa không!!!!') " href="<?= BASE_URL_ADMIN . '?act=category-delete&id=' . $category['id'] ?>">Xóa</a>
                       </td>
+                      <td><?= $category['id'] ?></td>
+                      <td><?= $category['category_name'] ?> </td>
+
                     </tr>
                   <?php endforeach; ?>
 

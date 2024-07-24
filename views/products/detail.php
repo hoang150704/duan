@@ -1,747 +1,362 @@
-    <!--breadcrumbs area start-->
-    <div class="breadcrumbs_area product_bread">
-        <div class="container">   
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb_content">
-                        <ul>
-                            <li><a href="<?=BASE_URL?>assets/user/index.html">home</a></li>
-                            <li>/</li>
-                            <li>product details</li>
+<div class="breadcrumbs_area product_bread">
+    <div class="container border p-3 rounded">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content ">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li>/</li>
+                        <li><?= $product['product_name'] ?></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+
+<!--product details start-->
+<div class="product_details">
+    <div class="container">
+        <?php if (isset($_SESSION['success'])) : ?>
+            <div class="d-flex align-items-center alert alert-success">
+
+                <i class="fas fa-check-circle"></i>
+                <p class="p-2 m-0"><?= $_SESSION['success'] ?></p>
+
+            </div>
+
+
+        <?php endif ?>
+        <?php unset($_SESSION['success']) ?>
+        <?php if (isset($_SESSION['warning'])) : ?>
+            <div class="d-flex align-items-center alert alert-warning">
+
+                <i class="fas fa-exclamation-circle" ></i>
+                <p class="p-2 m-0"><?= $_SESSION['warning'] ?></p>
+
+            </div>
+
+
+        <?php endif ?>
+        <?php unset($_SESSION['warning']) ?>
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <div class="product-details-tab">
+
+                    <div id="img-1" class="zoomWrapper single-zoom">
+                        <a href="#">
+                            <img id="zoom1" src="<?= BASE_URL . $product['main_image'] ?>" data-zoom-image="<?= BASE_URL . $product['main_image'] ?>" alt="big-1">
+                        </a>
+                    </div>
+
+                    <div class="single-zoom-thumb">
+                        <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                            <?php foreach ($listImage as $image) : ?>
+                                <li>
+                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="<?= BASE_URL . $image['image'] ?>" data-zoom-image="<?= BASE_URL . $image['image'] ?>">
+                                        <img src="<?= BASE_URL . $image['image'] ?>" alt="zo-th-1" />
+                                    </a>
+
+                                </li>
+                            <?php endforeach ?>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>         
-    </div>
-    <!--breadcrumbs area end-->
-    
-    <!--product details start-->
-    <div class="product_details">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-5">
-                   <div class="product-details-tab">
-
-                        <div id="img-1" class="zoomWrapper single-zoom">
-                            <a href="<?=BASE_URL?>assets/user/#">
-                                <img id="zoom1" src="<?=BASE_URL?>assets/user/theme_shop/assets/img/product/product5.jpg" data-zoom-image="assets/img/product/product5.jpg" alt="big-1">
-                            </a>
-                        </div>
-
-                        <div class="single-zoom-thumb">
-                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
-                                <li>
-                                    <a href="<?=BASE_URL?>assets/user/#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product4.jpg" data-zoom-image="assets/img/product/product4.jpg">
-                                        <img src="<?=BASE_URL?>assets/user/themeshop/assets/img/s-product/product3.jpg" alt="zo-th-1"/>
-                                    </a>
-
-                                </li>
-                                <li >
-                                    <a href="<?=BASE_URL?>assets/user/#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product6.jpg" data-zoom-image="assets/img/product/product6.jpg">
-                                        <img src="<?=BASE_URL?>assets/user/themeshop/assets/img/s-product/product.jpg" alt="zo-th-1"/>
-                                    </a>
-
-                                </li>
-                                <li >
-                                    <a href="<?=BASE_URL?>assets/user/#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product8.jpg" data-zoom-image="assets/img/product/product8.jpg">
-                                        <img src="<?=BASE_URL?>assets/user/themeshop/assets/img/s-product/product2.jpg" alt="zo-th-1"/>
-                                    </a>
-
-                                </li>
-                                <li >
-                                    <a href="<?=BASE_URL?>assets/user/#" class="elevatezoom-gallery active" data-update="" data-image="assets/img/product/product2.jpg" data-zoom-image="assets/img/product/product2.jpg">
-                                        <img src="<?=BASE_URL?>assets/user/themeshop/assets/img/s-product/product4.jpg" alt="zo-th-1"/>
-                                    </a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="product_d_right">
-                       <form action="#">
-                           
-                            <h1>Amazon Cloud Cam</h1>
-                            <div class=" product_ratting">
-                                <ul>
-                                    <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                    <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                    <li class="review"><a href="<?=BASE_URL?>assets/user/#"> 1 review </a></li>
-                                    <li class="review"><a href="<?=BASE_URL?>assets/user/#"> Write a review </a></li>
-                                </ul>
-                            </div>
-                            <div class="product_price">
-                                <span class="current_price">$70.00</span>
-                            </div>
-                            <div class="product_desc">
-                                <p>More room to move. With 80GB or 160GB of storage and up to 40 hours of battery life, the new iPod classic lets you enjoy up to 40,000 songs or up to 200 hours of video or any combination wherever you go. Cover Flow. Browse through your music collection by flipping through album art. Select an album to turn it over and see the track list. Enhanced interface. Experience a whole new way to browse and view your music and video. Sleeker design. Beautiful, durable, and sleeker than ever, iPod classic now features an anodized aluminum and polish.. </p>
-                            </div>
-
-                            <div class="product_variant color">
-                                <h3>color</h3>
-                                <select class="niceselect_option" id="color" name="produc_color">
-                                    <option selected value="1">choose in option</option>        
-                                    <option value="2">choose in option2</option>              
-                                    <option value="3">choose in option3</option>              
-                                    <option value="4">choose in option4</option>              
-                                </select>   
-                            </div>
-                            <div class="product_variant size">
-                                <h3>size</h3>
-                                <select class="niceselect_option" id="color1" name="produc_color">
-                                    <option selected value="1">size</option>        
-                                    <option value="2">x</option>              
-                                    <option value="2">xl</option>              
-                                    <option value="3">md</option>              
-                                    <option value="4">xxl</option>              
-                                    <option value="4">s</option>              
-                                </select> 
-                            </div>
-                            <div class="product_variant quantity">
-                                <label>quantity</label>
-                                <input min="1" max="100" value="1" type="number">
-                                <button class="button" type="submit">add to cart</button>  
-                            </div>
-                            <div class=" product_d_action">
-                               <ul>
-                                   <li><a href="<?=BASE_URL?>assets/user/#" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wish List</a></li>
-                                   <li><a href="<?=BASE_URL?>assets/user/#" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i> Compare this Product</a></li>
-                               </ul>
-                            </div>
-                            
-                        </form>
-                        <div class="priduct_social">
-                            <h3>Share on:</h3>
+            <div class="col-lg-7 col-md-7">
+                <div class="product_d_right">
+                    <form action="" method="post">
+                        <input type="hidden" value="<?= $product['main_image'] ?>" name="main_image">
+                        <input type="hidden" value="<?=$product['product_lookup_id'] ?>" name="product_lookup_id">
+                        <h1><?= $product['product_name'] ?></h1>
+                        <input type="hidden" value="<?= $product['product_name'] ?>" name="product_name">
+                        <div class=" product_ratting" id="rating">
                             <ul>
-                                <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-rss"></i></a></li>           
-                                <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-vimeo"></i></a></li>           
-                                <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-tumblr"></i></a></li>           
-                                <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-pinterest"></i></a></li>        
-                                <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-linkedin"></i></a></li>        
-                            </ul>      
-                        </div>
+                                <?php
+                                // Hiển thị sao vàng đầy đủ
+                                $full_stars = floor($averageRating);
+                                $partial_star_percentage = ($averageRating - $full_stars) * 100;
 
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div>
-    <!--product details end-->
-    
-    <!--product info start-->
-    <div class="product_d_info">
-        <div class="container">   
-            <div class="row">
-                <div class="col-12">
-                    <div class="product_d_inner">   
-                        <div class="product_info_button">    
-                            <ul class="nav" role="tablist">
-                                <li >
-                                    <a class="active" data-toggle="tab" href="<?=BASE_URL?>assets/user/#info" role="tab" aria-controls="info" aria-selected="false">More info</a>
-                                </li>
-                                <li>
-                                     <a data-toggle="tab" href="<?=BASE_URL?>assets/user/#sheet" role="tab" aria-controls="sheet" aria-selected="false">Data sheet</a>
-                                </li>
-                                <li>
-                                   <a data-toggle="tab" href="<?=BASE_URL?>assets/user/#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
-                                </li>
+                                for ($i = 1; $i <= $full_stars; $i++) {
+                                    echo '<li><a href="#"><i class="fa fa-star full-star" style="color: gold;"></i></a></li>';
+                                }
+
+                                if ($partial_star_percentage > 0) {
+                                    echo '<li><a href="#"><i class="fa fa-star partial-star" style="background: linear-gradient(90deg, gold ' . $partial_star_percentage . '%, gray ' . $partial_star_percentage . '%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i></a></li>';
+                                }
+
+                                for ($i = $full_stars + ($partial_star_percentage > 0 ? 1 : 0); $i < 5; $i++) {
+                                    echo '<li><a href="#"><i class="fa fa-star empty-star"></i></a></li>';
+                                }
+                                ?>
+                                <li class="review"> <?= $countListComment ?> Đánh giá </li>
+
                             </ul>
                         </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="info" role="tabpanel" >
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>    
-                            </div>
+                        <div class="product_price">
+                            <?php if ($product['sale_price'] == 0) : ?>
+                                <?php if ($product['price'] == 0) : ?>
+                                    <span class="current_price">Liên hệ</span>
+                                    <input type="hidden" value="0" name="price">
+                                <?php else : ?>
+                                    <input type="hidden" value="<?= $product['price'] ?>" name="price">
+                                    <span class="current_price"><?= $product['price'] . ' đ' ?></span>
+                                <?php endif ?>
+                            <?php else : ?>
+                                <input type="hidden" value="<?= $product['sale_price'] ?>" name="price">
+                                <span class="current_price"><?= $product['sale_price'] . ' đ' ?></span>
+                                <del><span class="old_price"><?= $product['price'] . ' đ' ?></span></del>
+                            <?php endif ?>
 
-                            <div class="tab-pane fade" id="sheet" role="tabpanel" >
-                                <div class="product_d_table">
-                                   <form action="#">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="first_child">Compositions</td>
-                                                    <td>Polyester</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Styles</td>
-                                                    <td>Girly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Properties</td>
-                                                    <td>Short Dress</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>    
-                            </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel" >
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>
-                                <div class="product_info_inner">
-                                    <div class="product_ratting mb-10">
-                                        <ul>
-                                            <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="<?=BASE_URL?>assets/user/#"><i class="fa fa-star"></i></a></li>
-                                        </ul>
-                                        <strong>Posthemes</strong> 
-                                        <p>09/07/2018</p>
-                                    </div>
-                                    <div class="product_demo">
-                                        <strong>demo</strong>
-                                        <p>That's OK!</p>
-                                    </div>
-                                </div> 
-                                <div class="product_review_form">
-                                    <form action="#">
-                                        <h2>Add a review </h2>
-                                        <p>Your email address will not be published. Required fields are marked </p>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for="review_comment">Your review </label>
-                                                <textarea name="comment" id="review_comment" ></textarea>
-                                            </div> 
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="author">Name</label>
-                                                <input id="author"  type="text">
-
-                                            </div> 
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="email">Email </label>
-                                                <input id="email"  type="text">
-                                            </div>  
-                                        </div>
-                                        <button type="submit">Submit</button>
-                                     </form>   
-                                </div>     
-                            </div>
                         </div>
-                    </div>     
+
+                        <?php if ($product['attribute_value_id'] != 0) : ?>
+                            <!-- <form id="variant-form">
+                                <?php foreach ($attributes as $attribute_name => $values) : ?>
+                                    <div class="attribute-group">
+                                        <h3><?php echo $attribute_name; ?>:</h3>
+                                        <?php foreach ($values as $value_id => $value_name) : ?>
+                                            <label>
+                                                <input type="radio" name="<?php echo $attribute_name; ?>" value="<?php echo $value_id; ?>">
+                                                <?php echo $value_name; ?>
+                                            </label>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </form> -->
+
+                            <div class="variant-info" id="variant-info">
+                                <!-- Variant information will be displayed here -->
+                            </div>
+
+
+
+
+                        <?php else : ?>
+                            <div class="product_variant color">
+                            </div>
+                        <?php endif ?>
+                        <div class="product_variant quantity">
+                            <label>Số lượng</label>
+                            <input min="1" max="<?= $product['quantity'] ?>" value="1" type="number" name="quantity">
+                            <button class="button" name="addtocart" type="submit">add to cart</button>
+
+                        </div>
+                        <div class="product_variant quantity">
+                            <label for="">Số lượng còn lại: <?= $product['quantity'] ?></label>
+                        </div>
+
+
+                    </form>
+                    <div class="priduct_social">
+                        <h3>Share on:</h3>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- Mô tả -->
+                    <div class="product_desc">
+                        <b>
+                            <h4>Mô tả</h4>
+                        </b>
+                        <hr>
+                        <?= $product['des'] ?>
+                    </div>
+
                 </div>
             </div>
-        </div>    
-    </div>  
-    <!--product info end-->
-    
-    <!--product section area start-->
-    <section class="product_section related_product">
-        <div class="container">
-            <div class="row">   
-                <div class="col-12">
-                   <div class="section_title">
-                       <h2>Related Products</h2>
-                       <p>Contemporary, minimal and modern designs embody the Lavish Alice handwriting</p>
-                   </div>
-                </div> 
-            </div>    
-            <div class="product_area"> 
-                 <div class="row">
-                    <div class="product_carousel product_three_column4 owl-carousel">
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product21.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product22.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
+        </div>
+    </div>
+</div>
+<!--product details end-->
 
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+<!--product info start-->
+<div class="product_d_info">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="product_d_inner">
+                    <div class="product_info_button">
+                        <ul class="nav" role="tablist">
+                            <!-- <li>
+                                <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">More info</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Data sheet</a>
+                            </li> -->
+                            <li>
+                                <a data-toggle="tab" class="active" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <section class="content-item" id="comments">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <?php if (empty($_SESSION['user'])) : ?>
+                                            <h3><a href="<?= BASE_URL . '?act=login&redirect=' . urlencode($_SERVER['REQUEST_URI']) ?>" style="color: #0071e3;">Đăng nhập</a> để bình luận</h3>
+                                        <?php else : ?>
+                                            <form method="POST" action="">
+                                                <h3 class="pull-left">New Comment</h3>
+                                                <button type="submit" class="btn btn-primary pull-right" name="submitcomment">Submit</button>
+                                                <fieldset>
+                                                    <div class="row">
+                                                        <div class="col-sm-3 col-lg-1 hidden-xs">
+                                                            <img class="img-responsive" src="<?= BASE_URL . $_SESSION['user']['avatar'] ?>" alt="">
+                                                            <p><?= $_SESSION['user']['fullname'] ?></p>
+                                                        </div>
+                                                        <div class="form-group col-xs-12 col-sm-9 col-lg-11">
+                                                            <textarea class="form-control" id="message" name="comment" placeholder="Bình luận"></textarea>
+                                                        </div>
+                                                        <div class="row mt-3 d-flex align-items-center">
+                                                            <div class="col-sm-3 pr-0 col-lg-1 hidden-xs">
+                                                                <h5><b>Đánh giá: </b></h5>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-9 col-lg-11">
+                                                                <div id="rating" class="rating">
+                                                                    <input type="radio" id="star5" name="rating" value="5"><label for="star5" class="fa fa-star commentstar"></label>
+                                                                    <input type="radio" id="star4" name="rating" value="4"><label for="star4" class="fa fa-star commentstar"></label>
+                                                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3" class="fa fa-star commentstar"></label>
+                                                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2" class="fa fa-star commentstar"></label>
+                                                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1" class="fa fa-star commentstar"></label>
 
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
+                                                                </div>
+                                                                <input type="hidden" name="rating" id="rating-value">
 
-                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <?php if (isset($_SESSION['errors'])) : ?>
+                                                            <?php foreach ($_SESSION['errors'] as $error) : ?>
+                                                                <span class="alert alert-danger mt-3"><?= $error ?></span>
+                                                            <?php endforeach ?>
+
+                                                        <?php endif ?>
+                                                        <?php unset($_SESSION['errors']); ?>
+                                                        <?php if (isset($_SESSION['success_comment'])) : ?>
+                                                            <span class="alert alert-success mt-3"><?= $_SESSION['success_comment'] ?></span>
+                                                        <?php endif ?>
+                                                        <?php unset($_SESSION['success_comment']); ?>
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        <?php endif ?>
+                                        <h3><?= $countListComment ?> Comments</h3>
+
+                                        <!-- COMMENT 1 - START -->
+                                        <?php foreach ($listComments as $comments) : ?>
+                                            <div class="media row">
+                                                <a class="pull-left col-1" href="#"><img class="media-object" src="<?= BASE_URL . $comments['avatar'] ?>" alt=""></a>
+                                                <div class="media-body col-10">
+                                                    <h4 class="media-heading"><?= $comments['fullname'] ?></h4>
+                                                    <div class=" product_ratting">
+                                                        <ul>
+                                                            <?php
+                                                            for ($i = 1; $i <= 5; $i++) {
+                                                                if ($i <= $comments['rating']) {
+                                                                    // Sao vàng
+                                                                    echo '<li><i class="fa fa-star" style="color: gold;"></i></li>';
+                                                                } else {
+                                                                    // Sao xám
+                                                                    echo '<li><i class="fa fa-star" style="color: gray;"></i></li>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </ul>
+                                                    </div>
+                                                    <p><?= $comments['comment_content'] ?>.</p>
+                                                    <ul class="list-unstyled list-inline media-detail pull-left">
+                                                        <li><i class="fa fa-calendar"></i><?= $comments['date_comment'] ?></li>
+
+                                                    </ul>
+                                                    <ul class="list-unstyled list-inline media-detail pull-right">
+
+                                                    </ul>
+                                                </div>
+
                                             </div>
-                                       </div>
-
+                                            <?php if (!empty($comments['reply'])) : ?>
+                                                <div class="row">
+                                                    <p class="alert alert-success mb-2">Admin: <?= $comments['reply'] ?></p>
+                                                </div>
+                                            <?php endif ?>
+                                        <?php endforeach ?>
+                                        <!-- COMMENT 1 - END -->
                                     </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Marshall Portable  Bluetooth</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product27.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product28.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Koss KPH7 Portable</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product6.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product5.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Beats Solo2 Solo 2</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product7.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product8.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Beats EP Wired</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product24.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product25.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Bose SoundLink Bluetooth</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product10.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product11.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Apple iPhone SE 16GB</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product23.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product24.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">JBL Flip 3 Portable</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
             </div>
-               
         </div>
-    </section>
-    <!--product section area end-->
-    
-    <!--product section area start-->
-    <section class="product_section upsell_product">
-        <div class="container">
-            <div class="row">   
-                <div class="col-12">
-                   <div class="section_title">
-                       <h2>Upsell Products</h2>
-                       <p>Contemporary, minimal and modern designs embody the Lavish Alice handwriting</p>
-                   </div>
-                </div> 
-            </div>    
-            <div class="product_area"> 
-                 <div class="row">
-                    <div class="product_carousel product_three_column4 owl-carousel">
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product15.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product16.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
+    </div>
+</div>
+<!--product info end-->
 
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Marshall Portable  Bluetooth</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product17.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product18.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Koss KPH7 Portable</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product19.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product20.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Beats Solo2 Solo 2</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product7.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product8.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Beats EP Wired</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product24.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product25.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Bose SoundLink Bluetooth</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product10.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product11.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-
-                                    <div class="product_sale">
-                                        <span>-7%</span>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">Apple iPhone SE 16GB</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                    <span class="old_price">£86.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="single_product">
-                                <div class="product_thumb">
-                                    <a class="primary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product23.jpg" alt=""></a>
-                                    <a class="secondary_img" href="<?=BASE_URL?>assets/user/product-details.html"><img src="<?=BASE_URL?>assets/user/themeshop/assets/img/product/product24.jpg" alt=""></a>
-                                    <div class="product_action">
-                                        <div class="hover_action">
-                                           <a  href="<?=BASE_URL?>assets/user/#"><i class="fa fa-plus"></i></a>
-                                            <div class="action_button">
-                                                <ul>
-
-                                                    <li><a title="add to cart" href="<?=BASE_URL?>assets/user/cart.html"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                    <li><a href="<?=BASE_URL?>assets/user/wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-
-                                                    <li><a href="<?=BASE_URL?>assets/user/compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-
-                                                </ul>
-                                            </div>
-                                       </div>
-
-                                    </div>
-                                    <div class="quick_button">
-                                        <a href="<?=BASE_URL?>assets/user/#" data-toggle="modal" data-target="#modal_box" title="quick_view">+ quick view</a>
-                                    </div>
-                                </div>
-                                <div class="product_content">
-                                    <h3><a href="<?=BASE_URL?>assets/user/product-details.html">JBL Flip 3 Portable</a></h3>
-                                    <span class="current_price">£60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--product section area start-->
+<section class="product_section related_product">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section_title">
+                    <h2>Có thể bạn sẽ thích</h2>
+                    <p>Thiết kế basic, hợp thời trang</p>
                 </div>
             </div>
-               
         </div>
-    </section>
-    <!--product section area end-->
+        <div class="product_area">
+            <div class="row">
+                <div class="product_carousel product_three_column4 owl-carousel">
+                    <?php foreach ($listAoThun as $AoThun) :  ?>
+                        <div class="col-lg-3">
+                            <div class="single_product">
+                                <div class="product_thumb">
+                                    <a class="primary_img" href="<?= BASE_URL . '?act=product-detail&id=' . $AoThun['id'] ?>"><img style="width: 253px !important; height: 253px !important; object-fit: cover; overflow: hidden;" src="<?= BASE_URL . $AoThun['main_image'] ?>" alt="" id="main_image"></a>
+                                    <!-- <a class="secondary_img" href="product-details.html"><img src="<?= BASE_URL ?>assets/user/theme_shop/assets/img/product/product22.jpg" alt=""></a> -->
+
+                                    <div class="quick_button">
+                                        <a href="<?= BASE_URL . '?act=product-detail&id=' . $AoThun['id'] ?>" title="quick_view">Xem sản phẩm</a>
+
+                                    </div>
+
+                                    <div class="product_sale">
+                                        <span><?php if ($AoThun['sale_price'] != 0) {
+                                                    $percent = round(100 - $AoThun['sale_price'] / $AoThun['price'] * 100);
+                                                    echo $percent . '%';
+                                                } else {
+                                                    echo 'New';
+                                                } ?></span>
+                                    </div>
+                                </div>
+                                <div class="product_content">
+                                    <h3><a href="<?= BASE_URL . '?act=product-detail&id=' . $AoThun['id'] ?>" style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;text-overflow: ellipsis; font-size: 14px; min-height: 55px;"><?= $AoThun['product_name'] ?></a></h3>
+                                    <?php if ($AoThun['sale_price'] == 0) : ?>
+                                        <?php if ($AoThun['price'] == 0) : ?>
+                                            <span class="current_price">Liên hệ</span>
+                                        <?php else : ?>
+                                            <span class="current_price"><?= $AoThun['price'] . ' đ' ?></span>
+                                        <?php endif ?>
+                                    <?php else : ?>
+                                        <span class="current_price"><?= $AoThun['sale_price'] . ' đ' ?></span>
+                                        <span class="old_price"><?= $AoThun['price'] . ' đ' ?></span>
+                                    <?php endif ?>
+
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

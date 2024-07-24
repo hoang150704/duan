@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title ?? 'Dashbord'  ?> - Admin</title>
+    
     <?php if(isset($style)&&$style){
        require_once PATH_VIEW_ADMIN . 'styles/'.$style .'.php';
 
@@ -55,6 +56,7 @@
  
      }
     ?>
+    
 </body>
 
 </html>

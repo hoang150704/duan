@@ -31,7 +31,7 @@ if(!function_exists('checkSameAttributeNameById')){
             $stmt = $GLOBALS['conn']->prepare($sql);
             $stmt->bindParam(":attribute_name",$attribute_name);
             $stmt->bindParam(":id",$id);
-
+ 
             $stmt->execute();
 
             $data = $stmt ->fetch();
