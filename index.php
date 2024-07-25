@@ -16,6 +16,7 @@ require_file(PATH_MODEL);
 // Điều hướng
 $act=$_GET['act'] ?? '/';
 checkCheckout($act);
+checkLoginRequired($act);
 match ($act) {
     '/' =>homeController(),
     // Tài khoản
@@ -28,8 +29,12 @@ match ($act) {
     'change-password'=>changePassword(),
     'change-password-success'=>changePasswordSuccess(),
     'update-user'=>updateUser(),
-    'change-email'=>changeEmail($_GET['check']),
+    'change-email'=>changeEmail( $_GET['check']),
     'success-change-email'=>changeEmailSuccess(),
+    'err-email'=>errEmail(),   
+    'forgot-password'=>forgotPassword($_GET['check']), 
+    'err-forgot'=>errForgot(),
+    'success-forgot'=>forgotPasswordSuccess(),
     // Sản phẩm
     'product-detail'=>productDetail($_GET['id']),
     'product-list'=>productList($_GET['id']),
@@ -38,7 +43,9 @@ match ($act) {
     // Đơn hàng
     'checkout'=>checkoutOrder(),
     'success'=>successOrder(),
-    
+
+    // 
+
 };
 
 // 

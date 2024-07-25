@@ -18,8 +18,8 @@
                 <div class="auth-form-outer">
                     <a href="<?=BASE_URL?>">Trang chủ</a>
                     <div class="d-flex flex-column mt-5">
-                        <h2 class="auth-form-title ">
-                            Đăng nhập
+                        <h2 class="auth-form-title mb-3">
+                            Lấy lại mật khẩu
                         </h2>
                     </div>
                     <?php if (isset($_SESSION['errors'])) : ?>
@@ -39,16 +39,22 @@
                         <?php unset($_SESSION['warningLogin']) ?>
                     <?php endif ?>
                     <form class="login-form" method="post">
-                        <input type="text" class="auth-form-input" placeholder="Username" name="username">
-                        <input type="password" class="auth-form-input" placeholder="Password" name="password">
-                        <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>
-                        <span> I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
-                        </label>
-                        <div class="footer-action">
-                            <input type="submit" value="Đăng nhập" class="auth-submit">
-                            <a href="<?=BASE_URL.'?act=forgot-password&check=1'?>" class="auth-btn-direct">Quên mật khẩu</a>
+                        <div <?=$style1?>>
+                        <input type="email" class="auth-form-input" placeholder="Email" name="email" >
+                        <label for="">Nhập mail bạn đăng kí tài khoản</label>
                         </div>
-                        <p>Bạn chưa có tài khoản ? <a href="<?=BASE_URL.'?act=signup'?>">Đăng kí</a></p>
+                        <!--  -->
+                        <div <?=$style2?>>
+                        <input type="number" class="auth-form-input" placeholder="Mã xác thực" name="vericode" >
+                        <label for="">Nhập mã gửi về tài khoản</label>
+                        </div>
+                        <div <?=$style3?>>
+                        <input type="password" class="auth-form-input" placeholder="Mật khẩu mới" name="password" >
+                        <input type="password" class="auth-form-input" placeholder="Nhập lại mật khẩu mới" name="repassword" >
+                        </div>
+                        <div class="footer-action">
+                            <input type="submit" value="Submit" class="auth-submit">
+                        </div>
                     </form>
                 </div>
             </div>

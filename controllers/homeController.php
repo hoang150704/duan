@@ -12,4 +12,6 @@ function homeController(){
     $newProduct = listProductLimit(9);
     require_once PATH_VIEW.'layouts/master.php';
 }
+// 
+
 ?>

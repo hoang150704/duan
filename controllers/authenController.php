@@ -54,16 +54,139 @@ function logoutUser()
 }
 
 
-function forgotPassword()
+function forgotPassword($key)
 {
-    if (!empty($_POST)) {
-        $user = getPasswordByEmail($_POST['email']);
-        if (empty($user)) {
-            $_SESSION['errors'] = 'Email không tồn tại trên hệ thống';
-        } else {
+    $check = intval($key);
+    // Kiểm tra giá trị $check có hợp lệ hay không
+    $validChecks = [1, 2, 3, 4];
+    if (!in_array($check, $validChecks) || !isset($check)) {
+        if (isset($_SESSION['step'])) {
+            unset($_SESSION['step']);
+        }
+        header('Location: ' . BASE_URL . '?act=err-forgot');
+        exit;
+    }
+
+    // Kiểm tra giá trị $check hợp lệ dựa trên phiên làm việc
+    if (!isset($_SESSION['step'])) {
+        $_SESSION['step'] = 1;
+    }
+
+    // Nếu giá trị $check không khớp với giá trị bước hiện tại hoặc bước kế tiếp, chuyển hướng về bước hợp lệ
+    if ($check > $_SESSION['step']) {
+        header('Location: ' . BASE_URL . '?act=forgot-password&check=' . $_SESSION['step']);
+        exit;
+    }
+    $_SESSION['step'] = $check;
+    if ($check == 1) {
+        $style1 = 'style="display: block;"';
+        $style2 = 'style="display: none;"';
+        $style3 = 'style="display: none;"';
+        // 
+        if (!empty($_POST)) {
+            $user = getPasswordByEmail($_POST['email']);
+            if (empty($user)) {
+                $_SESSION['errors'] = 'Email không tồn tại trên hệ thống';
+            } else {
+                $titleEmail = "Mã xác nhận đổi mật khẩu";
+                $session_lifetime = 180; // 3 phút
+
+                // Kiểm tra nếu mã xác nhận đã tồn tại và đã hết hạn
+                if (isset($_SESSION['verification']) && isset($_SESSION['created'])) {
+                    if (time() - $_SESSION['created'] > $session_lifetime) {
+                        unset($_SESSION['verification']);
+                        unset($_SESSION['created']);
+                    }
+                }
+
+                // Tạo mã xác nhận mới nếu không tồn tại
+                if (!isset($_SESSION['verification'])) {
+                    $verification = generateRandomCode();
+                    $_SESSION['verification'] = $verification;
+                    $_SESSION['created'] = time();
+                }
+
+                $body = "Mã xác nhận của bạn là: " . $_SESSION['verification'] . ". Mã chỉ tồn tại trong 3 phút.";
+                $kq = SendMail($_POST['email'], $titleEmail, $body);
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['step'] = 2;
+                header('Location: ' . BASE_URL . '?act=forgot-password&check=2');
+                exit;
+            }
         }
     }
+    if ($check == 2) {
+        $style1 = 'style="display: none;"';
+        $style2 = 'style="display: block;"';
+        $style3 = 'style="display: none;"';
+        // 
+        if (!empty($_POST)) {
+            if (time() - $_SESSION['created'] > 180) {
+                unset($_SESSION['verification']);
+                unset($_SESSION['created']);
+                $_SESSION['errors'] = "Mã xác nhận đã hết hạn. Vui lòng thử lại.";
+                header('Location: ' . BASE_URL . '?act=forgot-password&check=1');
+                exit;
+            }
+
+            if ($_POST['vericode'] != $_SESSION['verification']) {
+                $_SESSION['errors'] = "Bạn nhập mã không đúng";
+                header('Location: ' . BASE_URL . '?act=forgot-password&check=2');
+                exit;
+            } else {
+                unset($_SESSION['verification']);
+                unset($_SESSION['created']);
+                $_SESSION['step'] = 3;
+                header('Location: ' . BASE_URL . '?act=forgot-password&check=3');
+                exit;
+            }
+        }
+    }
+    if ($check == 3) {
+        $style1 = 'style="display: none;"';
+        $style2 = 'style="display: none;"';
+        $style3 = 'style="display: block;"';
+        // 
+        if (!empty($_POST)) {
+            $repass = $_POST['repassword'];
+            $data = [
+                'password'=>$_POST['password'],
+            ];
+            if(empty($data['password'])){
+                $_SESSION['errors'] = "Bạn phải nhập mật khẩu";
+            }
+            elseif(strlen($data['password']) < 8 || strlen($data['password']) > 20){
+                $_SESSION['errors'] = "Mật khẩu phải lớn hơn bằng 8 kí tự và không quá 20 kí tự";
+            }
+            elseif(preg_match('/\s/', $data['password'])){
+                $_SESSION['errors'] = "Mật khẩu không được có khoảng trắng";
+            }
+            elseif(regaxVietnamese($data['password'])){
+                $_SESSION['errors'] = "Mật khẩu không được có dấu";
+            }
+            elseif ($repass != $data['password']) {
+                $_SESSION['errors'] = "Mật khẩu mới phải trung với nhập lại mật khẩu";
+                header('Location: ' . BASE_URL . '?act=forgot-password&check=3');
+                exit;
+            }
+            else {
+
+                update('account', $_SESSION['user_id'], $data);
+                unset($_SESSION['user_id']);
+                unset($_SESSION['step']);
+                header('Location: ' . BASE_URL . '?act=success-forgot');
+                exit;
+            }
+        }
+    }
+    require_once PATH_VIEW . 'authen/forgotPassword.php';
 }
+// Lấy lại mật khẩu thành cong
+function forgotPasswordSuccess()
+{
+    require_once PATH_VIEW . 'authen/success_forgot.php';
+}
+
 // Đăng kí tài khoản
 
 function signupUser()
@@ -213,12 +336,35 @@ function updateUser()
     require_once PATH_VIEW . 'layouts/master.php';
 }
 // Đổi email
-function changeEmail($check)
+function changeEmail($key)
 {
+    $check = intval($key);
+    // Kiểm tra giá trị $check có hợp lệ hay không
+    $validChecks = [1, 2, 3, 4];
+    if (!in_array($check, $validChecks) || !isset($check)) {
+        if (isset($_SESSION['step'])) {
+            unset($_SESSION['step']);
+        }
+        header('Location: ' . BASE_URL . '?act=err-email');
+        exit;
+    }
+
+    // Kiểm tra giá trị $check hợp lệ dựa trên phiên làm việc
+    if (!isset($_SESSION['step'])) {
+        $_SESSION['step'] = 1;
+    }
+
+    // Nếu giá trị $check không khớp với giá trị bước hiện tại hoặc bước kế tiếp, chuyển hướng về bước hợp lệ
+    if ($check > $_SESSION['step']) {
+        header('Location: ' . BASE_URL . '?act=change-email&check=' . $_SESSION['step']);
+        exit;
+    }
+    $_SESSION['step'] = $check;
+
     $view = 'authen/changeEmail';
     $style = 'style/info';
     $script = 'info';
-    // 
+
     if ($check == 1) {
         $style1 = 'style="display: block;"';
         $style2 = 'style="display: none;"';
@@ -251,14 +397,13 @@ function changeEmail($check)
 
                 $body = "Mã xác nhận của bạn là: " . $_SESSION['verification'] . ". Mã chỉ tồn tại trong 3 phút.";
                 $kq = SendMail($_POST['email'], $titleEmail, $body);
-
+                $_SESSION['step'] = 2;
                 header('Location: ' . BASE_URL . '?act=change-email&check=2');
                 exit;
             }
         }
     }
 
-    // Nếu check == 2, hiển thị form nhập mã xác nhận
     if ($check == 2) {
         $style1 = 'style="display: none;"';
         $style2 = 'style="display: block;"';
@@ -266,7 +411,6 @@ function changeEmail($check)
         $style4 = 'style="display: none;"';
 
         if (!empty($_POST)) {
-            // Kiểm tra nếu mã xác nhận hết hạn
             if (time() - $_SESSION['created'] > 180) {
                 unset($_SESSION['verification']);
                 unset($_SESSION['created']);
@@ -275,7 +419,6 @@ function changeEmail($check)
                 exit;
             }
 
-            // Kiểm tra mã xác nhận
             if ($_POST['verification'] != $_SESSION['verification']) {
                 $_SESSION['errors'] = "Bạn nhập mã không đúng";
                 header('Location: ' . BASE_URL . '?act=change-email&check=2');
@@ -283,51 +426,57 @@ function changeEmail($check)
             } else {
                 unset($_SESSION['verification']);
                 unset($_SESSION['created']);
+                $_SESSION['step'] = 3;
                 header('Location: ' . BASE_URL . '?act=change-email&check=3');
                 exit;
             }
         }
     }
-    if($check==3){
+
+    if ($check == 3) {
         $style1 = 'style="display: none;"';
         $style2 = 'style="display: none;"';
         $style3 = 'style="display: block;"';
         $style4 = 'style="display: none;"';
-        if(!empty($_POST)){
-            $newemail = checkSameEmailUserById('account',$_POST['newemail'],$_SESSION['user']['id']);
-            if($_SESSION['user']['email'] == $_POST['newemail']){
+
+        if (!empty($_POST)) {
+            $newemail = checkSameEmailUserById('account', $_POST['newemail'], $_SESSION['user']['id']);
+            if ($_SESSION['user']['email'] == $_POST['newemail']) {
                 $_SESSION['errors'] = "Email mới không được trùng với email cũ";
-            }elseif(!$newemail){
+            } elseif (!$newemail) {
                 $_SESSION['errors'] = "Email bạn nhập đã được đăng kí tài khoản khác";
             }
-            if(!empty($_SESSION['errors'])){
+            if (!empty($_SESSION['errors'])) {
                 header('Location: ' . BASE_URL . '?act=change-email&check=3');
                 exit;
-            }else{
+            } else {
                 $_SESSION['newemail'] = $_POST['newemail'];
+                $_SESSION['step'] = 4;
                 header('Location: ' . BASE_URL . '?act=change-email&check=4');
                 exit;
             }
         }
     }
-    if($check==4){
+
+    if ($check == 4) {
         $style1 = 'style="display: none;"';
         $style2 = 'style="display: none;"';
         $style3 = 'style="display: none;"';
         $style4 = 'style="display: block;"';
-        if(!empty($_POST)){
-            
-            if($_SESSION['user']['password'] != $_POST['password']){
+
+        if (!empty($_POST)) {
+            if ($_SESSION['user']['password'] != $_POST['password']) {
                 $_SESSION['errors'] = "Mật khẩu sai";
                 header('Location: ' . BASE_URL . '?act=change-email&check=4');
                 exit;
-            }else{
+            } else {
                 $data = [
-                    'email'=>$_SESSION['newemail']
+                    'email' => $_SESSION['newemail']
                 ];
-                update('account',$_SESSION['user']['id'],$data);
+                update('account', $_SESSION['user']['id'], $data);
                 $_SESSION['user']['email'] = $_SESSION['newemail'];
                 unset($_SESSION['newemail']);
+                unset($_SESSION['step']);
                 header('Location: ' . BASE_URL . '?act=success-change-email');
                 exit;
             }
@@ -336,6 +485,7 @@ function changeEmail($check)
 
     require_once PATH_VIEW . 'layouts/master.php';
 }
+
 // 
 function generateRandomCode()
 {
@@ -345,3 +495,12 @@ function changeEmailSuccess()
 {
     require_once PATH_VIEW . 'authen/success-email.php';
 }
+function errEmail()
+{
+    require_once PATH_VIEW . 'authen/err-email.php';
+}
+function errForgot()
+{
+    require_once PATH_VIEW . 'authen/err-forgot.php';
+}
+

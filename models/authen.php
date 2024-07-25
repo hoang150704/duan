@@ -28,7 +28,7 @@ if(!function_exists('getPasswordByEmail')){
         try {
             //Nếu không trùng trả về true
            
-            $sql = "SELECT * FROM `account` WHERE email = :email `role` =0 LIMIT 1" ;
+            $sql = "SELECT * FROM `account` WHERE email = :email AND `role` =0 LIMIT 1" ;
 
             $stmt = $GLOBALS['conn']->prepare($sql);
             $stmt->bindParam(":email",$email);

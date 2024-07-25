@@ -13,6 +13,7 @@
         <div class="auth-container">
             <div class="auth-action-left">
                 <div class="auth-form-outer">
+                <a href="<?=BASE_URL?>">Trang chủ</a>
                 <div class="d-flex flex-column">
 
                     <h2 class="auth-form-title">
@@ -34,8 +35,8 @@
                             <span> I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
                         </label>
                         <div class="footer-action">
-                            <input type="submit" value="Sign Up" class="auth-submit">
-                            <a href="login.html" class="auth-btn-direct">Sign In</a>
+                            <input type="submit" value="Đăng ký" class="auth-submit">
+                            <a href="<?=BASE_URL.'?act=login'?>" class="auth-btn-direct">Đăng nhập</a>
                         </div>
                     </form>
                 </div>

@@ -97,3 +97,26 @@ if (!function_exists('checkCheckout')) {
         }
     }
 }
+// 
+if (!function_exists('checkLoginRequired')) {
+    function checkLoginRequired($act)
+    {
+        $protectedActions = [
+            'info',
+            'order',
+            'change-password',
+            'change-password-success',
+            'update-user',
+            'change-email',
+            'success-change-email',
+            'err-email'
+        ];
+
+        if (in_array($act, $protectedActions)) {
+            if (empty($_SESSION['user'])) { // Assuming you store user login status in $_SESSION['user']
+                header('Location:' . BASE_URL . '?act=login');
+                exit();
+            }
+        }
+    }
+}
