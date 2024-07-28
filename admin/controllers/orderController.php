@@ -40,6 +40,7 @@ function orderShowOne($id)
 function orderUpdate($id)
 {
     $order = showOne('order_shop', $id);
+    $_SESSION['status_id'] = $order['status_id'];
     if (empty($order)) {
         e404();
     }
@@ -60,24 +61,40 @@ function orderUpdate($id)
             "status_id" => $_POST['status_id'] ?? $order['status_id'],
 
         ];
-       
-        $details_data = [
-            "detail_quantity" => $_POST['detail_quantity'] ?? $order['detail_quantity'],
-        ];
+        
+
+        if($data['status_id']==5){
+            $data['date_success_order'] =date('Y-m-d');
+        }
 
 
         $errors = validateUpdate($data, $id);
 
             update('order_shop', $id, $data);
-            $i=0;
-            foreach ($details as $de) {                
-                    $detail_data = [
-                        "detail_quantity" => $details_data['detail_quantity'][$i],
-                    ];
-                    update('detail_order',$de['id'], $detail_data);
-                    $i++;
+            if($data['status_id'] != $_SESSION['status_id']){
+                $data1 = [
+                    'order_id'=>$id,
+                    'status_id'=>$data['status_id'],
+                ];
+                insert('order_status_history',$data1);
             }
-            $_SESSION['success'] = "Bạn đã sửa tài khoản thành công";
+            $arr = [3,4,5,6,7,8,9];
+            if(!in_array($data['status_id'],$arr)){
+                $details_data = [
+                    "detail_quantity" => $_POST['detail_quantity'] ?? $order['detail_quantity'],
+                ];
+                
+                $i=0;
+                foreach ($details as $de) {                
+                        $detail_data = [
+                            "detail_quantity" => $details_data['detail_quantity'][$i],
+                        ];
+                        update('detail_order',$de['id'], $detail_data);
+                        $i++;
+                }
+            }
+
+            $_SESSION['success'] = "Bạn đã sửa đơn hàng thành công";
         
 
 

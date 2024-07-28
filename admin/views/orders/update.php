@@ -175,16 +175,70 @@ updateSubtotal();
 </select>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    var statusSelect = document.getElementById('status_id');
-    var currentStatus = <?= $order['status_id'] ?>;
-    
-    if (currentStatus == 3) { // Đơn hàng đã hoàn thành
-        for (var i = 0; i < statusSelect.options.length; i++) {
-            if (statusSelect.options[i].value != 3) {
-                statusSelect.options[i].disabled = true;
+        // Object chứa logic cho phép chuyển trạng thái
+        const statusTransitions = {
+            1: [2, 6],       // Chưa xác nhận: Chỉ có thể chọn Đã xác nhận và Đã hủy
+            2: [3, 6],       // Đã xác nhận: Chỉ có thể chọn Đang vận chuyển hoặc Đã hủy
+            3: [4],          // Đang vận chuyển: Chỉ có thể chọn Đã giao hàng
+            4: [5, 7],       // Đã giao hàng: Chỉ có thể chọn Đã hoàn thành hoặc Hoàn hàng
+            5: [],           // Đã hoàn thành: Không thể chuyển sang trạng thái khác
+            6: [],           // Đã hủy: Không thể chuyển sang trạng thái khác
+            7: [8],          // Hoàn hàng: Chỉ có thể chọn Đã hoàn hàng
+            8: [9],          // Đã hoàn hàng: Chỉ có thể chọn Đã hoàn tiền
+            9: [],           // Đã hoàn tiền: Không thể chuyển sang trạng thái khác
+            10: [11, 6],     // Chưa thanh toán: Chỉ có thể chọn Đã thanh toán hoặc Đã hủy
+            11: [6, 2]       // Đã thanh toán: Chỉ có thể chọn Đã hủy hoặc Đã xác nhận
+        };
+
+        function updateFields() {
+            var status_id = parseInt(document.getElementById('status_id').value);
+            var fields = [
+                'note', 'shippingFee', 'order_address', 'order_phone', 'order_account_name'
+            ];
+
+            // Vô hiệu hóa các trường nhập liệu dựa trên status_id
+            if (status_id >= 3 && status_id <= 9) {
+                fields.forEach(function(field) {
+                    document.getElementById(field).setAttribute('disabled', 'disabled');
+                });
+
+                for (var i = 0; i < <?= count($details) ?>; i++) {
+                    document.getElementById('quantity' + i).setAttribute('disabled', 'disabled');
+                }
+            } else {
+                fields.forEach(function(field) {
+                    document.getElementById(field).removeAttribute('disabled');
+                });
+
+                for (var i = 0; i < <?= count($details) ?>; i++) {
+                    document.getElementById('quantity' + i).removeAttribute('disabled');
+                }
             }
         }
-    }
-});
-</script>
+
+        function updateStatusOptions() {
+            const statusSelect = document.getElementById('status_id');
+            const currentStatus = parseInt(statusSelect.value);
+
+            // Lấy các tùy chọn hợp lệ cho trạng thái hiện tại
+            const validOptions = statusTransitions[currentStatus] || [];
+
+            // Disable tất cả các tùy chọn trước khi enable tùy chọn hợp lệ
+            for (let option of statusSelect.options) {
+                option.disabled = true;
+            }
+
+            // Enable tùy chọn hợp lệ
+            for (let validOption of validOptions) {
+                const option = statusSelect.querySelector(`option[value="${validOption}"]`);
+                if (option) {
+                    option.disabled = false;
+                }
+            }
+        }
+
+        window.onload = function() {
+            updateFields(); // Kiểm tra khi trang tải lần đầu
+            updateStatusOptions(); // Kiểm tra khi trang tải lần đầu
+        }
+    </script>

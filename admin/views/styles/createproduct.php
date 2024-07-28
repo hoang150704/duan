@@ -79,6 +79,31 @@
     #class-variant{
         display: flex;
     }
+    #custom_image_preview_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.custom-image-container {
+    position: relative;
+    margin: 5px;
+}
+
+.custom-image {
+    width: 110px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.custom-remove-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
   </style>
   
 

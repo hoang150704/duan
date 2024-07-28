@@ -95,7 +95,7 @@ if(!function_exists('listAllOrderProcessing')){
         try {
             //code...
            
-            $sql = "SELECT * FROM $tableName WHERE `status`= 1 AND `status_id` = 1";
+            $sql = "SELECT * FROM $tableName WHERE `status`= 1 AND `status_id` IN (1,11)";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
            
@@ -117,7 +117,7 @@ if(!function_exists('listAllOrderTotalMoneyOnDAY')){
         try {
             //code...
            
-            $sql = "SELECT`total_money` FROM `order_shop` WHERE DATE(date_success_order)  = :date_success_order AND `status_id` = 3";
+            $sql = "SELECT`total_money` FROM `order_shop` WHERE DATE(date_success_order)  = :date_success_order AND `status_id` = 5";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
             $stmt->bindParam(":date_success_order",$date);
@@ -159,7 +159,7 @@ if(!function_exists('getCountCancel')){
         try {
             //code...
            
-            $sql = "SELECT COUNT(*) AS order_count FROM `order_shop` WHERE `status_id` = 4";
+            $sql = "SELECT COUNT(*) AS order_count FROM `order_shop` WHERE `status_id` IN (6, 9)";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
             $stmt->execute();

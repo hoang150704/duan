@@ -26,6 +26,7 @@ match ($act) {
     // Thông tin khách hàng
     'info'=>infoUser(),
     'order'=>orderOfUser(),
+    // Đổi thông tin
     'change-password'=>changePassword(),
     'change-password-success'=>changePasswordSuccess(),
     'update-user'=>updateUser(),

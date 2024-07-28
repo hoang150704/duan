@@ -179,6 +179,30 @@ if (!function_exists('delete_hidden')) {
         }
     }
 }
+if (!function_exists('delete')) {
+    function delete($tableName, $id,)
+    {
+        try {
+            //code...
+
+
+
+
+            $sql = "DELETE FROM $tableName WHERE id=:id
+            ";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
+        } catch (\Exception $e) {
+            //throw $th;
+            debug($e);
+        }
+    }
+}
 if (!function_exists('mask_email')) {
     function mask_email($email) {
         $em = explode("@", $email);

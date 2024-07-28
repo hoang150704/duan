@@ -17,5 +17,5 @@ define('DB_PORT','3006');
 define('DB_USERNAME','root');
 define('DB_PASSWORD','');
 define('DB_NAME','duan1');
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>

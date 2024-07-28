@@ -6,9 +6,20 @@ if (!function_exists('listProductByCategoryLimit')) {
         try {
             //Nếu không trùng trả về true
 
-            $sql = "SELECT product.id, product.product_name, product.category_id,product.main_image,product.status, product_lookup.price,product_lookup.sale_price FROM `product` 
-            INNER JOIN product_variant on product.id = product_variant.product_id INNER JOIN product_lookup ON product_variant.product_variant_id = product_lookup.id 
-            WHERE  category_id = :category_id AND product.status = 1  GROUP BY product.id  ORDER BY product.id DESC LIMIT $number  ";
+            $sql = "SELECT product.id, 
+       product.product_name, 
+       product.category_id,
+       product.main_image,
+       product.status, 
+       MIN(product_lookup.price) AS price,
+       MIN(product_lookup.sale_price) AS sale_price
+        FROM `product` 
+        INNER JOIN product_variant ON product.id = product_variant.product_id 
+        INNER JOIN product_lookup ON product_variant.product_variant_id = product_lookup.id 
+        WHERE category_id = :category_id AND product.status = 1  
+        GROUP BY product.id  
+        ORDER BY product.id DESC 
+        LIMIT $number";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
             $stmt->bindParam(":category_id", $id);
@@ -28,12 +39,24 @@ if (!function_exists('listProductLimit')) {
         try {
             //Nếu không trùng trả về true
 
-            $sql = "SELECT product.id, product.product_name, product.category_id,product.main_image,product.status, product_lookup.price,product_lookup.sale_price FROM `product` 
-            INNER JOIN product_variant on product.id = product_variant.product_id INNER JOIN product_lookup ON product_variant.product_variant_id = product_lookup.id 
-            WHERE   product.status = 1  GROUP BY product.id  ORDER BY product.id DESC LIMIT $number  ";
+            $sql = "SELECT 
+    product.id, 
+    product.product_name, 
+    product.category_id,
+    product.main_image,
+    product.status, 
+    MAX(product_lookup.price) AS price,
+    MAX(product_lookup.sale_price) AS sale_price
+    FROM `product` 
+    INNER JOIN product_variant ON product.id = product_variant.product_id 
+    INNER JOIN product_lookup ON product_variant.product_variant_id = product_lookup.id 
+    WHERE product.status = 1  
+    GROUP BY product.id  
+    ORDER BY product.id DESC 
+    LIMIT $number";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
-            
+
             $stmt->execute();
 
             return $stmt->fetchAll();

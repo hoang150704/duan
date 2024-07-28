@@ -19,6 +19,11 @@ function checkoutOrder(){
 
         ];
         $order_id = insert_get_last_id('order_shop',$order);
+        $history = [
+            'status_id'=>1,
+            'order_id'=>$order_id,
+        ];
+        insert('order_status_history',$history);
         foreach($_SESSION['order']['cart'] as $item ){
             
             $detail = [

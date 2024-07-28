@@ -13,7 +13,10 @@ function productListAll()
 // productShowOne
 function productShowOne($id)
 {
-    $product = showOne('account', $id);
+    $product = getProductById($id);
+    $images = listImageOnProduct($id);
+    $listComments = getComment($id);
+    $countListComment = count($listComments);
     if (empty($product)) {
         e404();
     }
@@ -119,24 +122,25 @@ function productCreate()
                 insert('product_variant', $variant);
             } else {
                 if (isset($_POST['variants'])) {
-                    $variants2 = $_POST['variants'];}
-                    foreach ($variants2 as $idPrefix => $variant2){
-                        $lookup = [
-                            'price'=>$variant2['price'],
-                            'sale_price'=>$variant2['sale_price'],
-                            'quantity'=>$variant2['quantity'],
+                    $variants2 = $_POST['variants'];
+                }
+                foreach ($variants2 as $idPrefix => $variant2) {
+                    $lookup = [
+                        'price' => $variant2['price'],
+                        'sale_price' => $variant2['sale_price'],
+                        'quantity' => $variant2['quantity'],
+                    ];
+                    $lookup_id = insert_get_last_id('product_lookup', $lookup);
+                    $attributes2 = $variant2['attributes'];
+                    foreach ($attributes2 as $attributes2) {
+                        $variant = [
+                            'product_id' => $product_id,
+                            'product_variant_id' => $lookup_id,
+                            'attribute_value_id' => $attributes2,
                         ];
-                        $lookup_id = insert_get_last_id('product_lookup',$lookup);
-                        $attributes2 = $variant2['attributes'];
-                        foreach($attributes2 as $attributes2){
-                            $variant = [
-                                'product_id' => $product_id,
-                                'product_variant_id' => $lookup_id,
-                                'attribute_value_id' => $attributes2,
-                            ];
-                            insert('product_variant',$variant);
-                        }
+                        insert('product_variant', $variant);
                     }
+                }
             }
 
             $GLOBALS['conn']->commit();
@@ -192,53 +196,79 @@ function validateProductCreate($data, $valuesId)
 // productUpdate
 function productUpdate($id)
 {
-    $product = showOne('account', $id);
-    if (empty($product)) {
-        e404();
-    }
-
-    $title = 'Cập nhật thông tin ' . ucfirst($product['productname']);
-    $view = 'products/update';
     $script = 'create';
-    $style = 'create';
+    $script2 = 'tinyMCE';
+    $style = 'createproduct';
+    $title = 'Thêm sản phẩm';
+    $view = 'products/update';
+    $product = getProductById($id);
+    $images = listImageOnProduct($id);
+    $categories = listAll('category');
     if (!empty($_POST)) {
+        $type_product = $_POST['type_product'];
         $data = [
-            "productname" => $_POST['productname'] ?? $product['productname'],
-            "password" => $_POST['password'] ?? $product['password'],
-            "email" => $_POST['email'] ?? $product['email'],
-            "phone" => $_POST['phone'] ?? $product['phone'],
-            "fullname" => $_POST['fullname'] ?? $product['fullname'],
-            "address" => $_POST['address'] ?? $product['adrress'],
-            "role" => $_POST['role'] ?? $product['role'],
-            'status' => 1,
-            'avatar' => $_FILES['avatar'] ?? $product['avatar'],
-
+            'product_name' => $_POST['product_name'] ?? $product['product_name'],
+            'des' => $_POST['des'] ?? $product['des'],
+            'category_id' => $_POST['category_id'] ?? $product['category_id'],
+            'main_image' => get_file_upload('main_image') ?? $product['main_image'],
+            'status' => 1
         ];
-
-        $date = date('Y-m-d');
-        $data['create_date'] = $date;
-        $avatar = $data['avatar'];
-        $errors = validateUpdate($data, $id);
-
-        if (!empty($errors)) {
-            $_SESSION['errors'] = $errors;
-        } else {
-
-            if (!empty($avatar) && $avatar['size'] > 0) {
-                $data['avatar'] = uploadFlie($avatar, 'uploads/products/');
-            } else {
-                $data['avatar'] = $product['avatar'];
-            }
-            update('account', $id, $data);
-            $_SESSION['success'] = "Bạn đã sửa sản phẩm thành công";
+        $main_image = $data['main_image'];
+        if (is_array($main_image)) {
+            $data['main_image'] = uploadFlie($main_image, 'uploads/products/');
+        }else{
+            $data['main_image'] = $product['main_image'];
         }
-
-
-        header('Location:' . BASE_URL_ADMIN . '?act=product-update&id=' . $id);
+        update('product', $id, $data);
+        // upload list hình ảnh
+        $files = get_file_upload('image');
+        $fileNameArr = $files['name'];
+        if ($files['size'][0] > 0) {
+            for ($i = 0; $i < count($fileNameArr); $i++) {
+                $file = [
+                    'name' => $files['name'][$i],
+                    'type' => $files['type'][$i],
+                    'tmp_name' => $files['tmp_name'][$i],
+                    'error' => $files['error'][$i],
+                    'size' => $files['size'][$i]
+                ];
+                $fileUpdates[] = uploadFlie($file, 'uploads/products/');
+            }
+        }
+        foreach ($fileUpdates as $fileUpdate) {
+            $image = [
+                'product_id' => $id,
+                'image' => $fileUpdate
+            ];
+            insert('image', $image);
+        }
+        // Xóa hình ảnh đã có
+        $deleted_images = $_POST['deleted_images'];
+        foreach ($deleted_images as $deleted_id) {
+            delete('image', $deleted_id);
+        }
+        // Cập nhật giá 
+        if ($type_product == 1) {
+            $detail = [
+                'quantity' => $_POST['quantity'] ?? $product['quantity'],
+                'price' => $_POST['price']  ?? $product['price'],
+                'sale_price' => $_POST['sale_price'] ?? $product['sale_price']
+            ];
+            if (empty($detail['price'])) {
+                $detail['price'] = $product['price'];
+            }
+            if (empty($detail['sale_price'])) {
+                $detail['sale_price'] = $product['sale_price'];
+            }
+            if (empty($detail['quantity'])) {
+                $detail['quantity'] = $product['quantity'];
+            }
+            update('product_lookup',$product['product_lookup_id'],$detail);
+        }
+        $_SESSION['success'] = "Bạn đã sửa sản phẩm thành công";
+        header('Location:' . BASE_URL_ADMIN . '?act=product-update&id='.$id);
         exit();
     }
-
-
     require_once PATH_VIEW_ADMIN . 'layouts/master.php';
 };
 

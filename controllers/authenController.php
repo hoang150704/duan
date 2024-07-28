@@ -215,6 +215,49 @@ function infoUser()
     $style = 'style/info';
     $script = 'info';
     $comments = getCommentForUser($_SESSION['user']['id']);
+    $statusOrders = getAllStatusOrder();
+    $orders = listAll('order_shop');
+    $order_detail = listAllDetailOrder();
+    $histories = listAllHistoryOrder();
+    $combinedData = [];
+    foreach ($statusOrders as $statusOrder) {
+        $statusId = $statusOrder['id'];
+        $combinedData[$statusId] = [
+            'status' => $statusOrder,
+            'orders' => []
+        ];
+    }
+    
+    // Duyệt qua từng đơn hàng
+    foreach ($orders as $order) {
+        $statusId = $order['status_id'];
+    
+        // Tạo một mảng chứa thông tin đơn hàng hiện tại
+        $orderData = [
+            'order' => $order,
+            'details' => [],
+            'history' => []
+        ];
+    
+        // Tìm các chi tiết sản phẩm thuộc đơn hàng hiện tại
+        foreach ($order_detail as $detail) {
+            if ($detail['order_id'] == $order['id']) {
+                $orderData['details'][] = $detail;
+            }
+        }
+    
+        // Tìm lịch sử trạng thái thuộc đơn hàng hiện tại
+        foreach ($histories as $history) {
+            if ($history['order_id'] == $order['id']) {
+                $orderData['history'][] = $history;
+            }
+        }
+    
+        // Thêm dữ liệu đơn hàng vào mảng tổng hợp theo trạng thái
+        $combinedData[$statusId]['orders'][] = $orderData;
+    }
+
+
     require_once PATH_VIEW . 'layouts/master.php';
 }
 function orderOfUser()
