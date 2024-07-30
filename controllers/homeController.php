@@ -13,5 +13,8 @@ function homeController(){
     require_once PATH_VIEW.'layouts/master.php';
 }
 // 
+function err(){
+    require_once __DIR__ . '/../404err.php';
+}
 
 ?>

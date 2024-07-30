@@ -1,4 +1,5 @@
 <?php
+// Hiển thị form đăng nhập
 function showFormLoginController()
 {
     if (!empty($_POST)) {
@@ -8,10 +9,12 @@ function showFormLoginController()
     }
     require_once PATH_VIEW . 'authen/login.php';
 }
+// Kiểm tra đăng nhâphj
 function isUserLoggedIn()
 {
     return isset($_SESSION['user']);
 }
+// Xử lí đăng nhập
 function loginUser()
 {
 
@@ -38,6 +41,7 @@ function loginUser()
     }
     exit();
 }
+// Đăng xấu
 function logoutUser()
 {
     if (!empty($_SESSION['user'])) {
@@ -52,8 +56,7 @@ function logoutUser()
     }
     exit();
 }
-
-
+// Quên mật khẩu
 function forgotPassword($key)
 {
     $check = intval($key);
@@ -256,13 +259,12 @@ function infoUser()
         // Thêm dữ liệu đơn hàng vào mảng tổng hợp theo trạng thái
         $combinedData[$statusId]['orders'][] = $orderData;
     }
+    
 
 
     require_once PATH_VIEW . 'layouts/master.php';
 }
-function orderOfUser()
-{
-}
+// Đổi mật khẩu
 function changePassword()
 {
     $view = 'authen/changePassword';
@@ -529,19 +531,22 @@ function changeEmail($key)
     require_once PATH_VIEW . 'layouts/master.php';
 }
 
-// 
+// Random code
 function generateRandomCode()
 {
     return rand(100000, 999999);
 }
+// ĐỔi email thành công
 function changeEmailSuccess()
 {
     require_once PATH_VIEW . 'authen/success-email.php';
 }
+// Lỗi 
 function errEmail()
 {
     require_once PATH_VIEW . 'authen/err-email.php';
 }
+// Lỗi
 function errForgot()
 {
     require_once PATH_VIEW . 'authen/err-forgot.php';

@@ -131,19 +131,61 @@
                                                         <?php endforeach ?>
                                                     </ul>
                                                 </div><!-- /.card-header -->
-                                                <div class="card-body">
-                                                    <div class="tab-content">
-                                                        <?php foreach ($combinedData as $key=>$value) : ?>
+                                                <div class="card-body p-2" style="background-color: #f4f6f9;">
+                                                    <div class="tab-content ">
+                                                        <?php foreach ($combinedData as $key => $value) : ?>
                                                             <div class="tab-pane <?php echo ($key == 1) ? "active" : ""; ?>" id="settings<?= $value['status']['id'] ?>">
                                                                 <!-- Content -->
-                                                                 <?php foreach($value['orders'] as $order): ?>
-                                                               <div class="row d-flex justify-content-between">
-                                                                <div class="col">
-                                                                    <?=$order['total_money']?>
-                                                                </div>
-                                                               </div>
-                                                               <?php endforeach ?>
-                                                            <!-- end content -->
+                                                                <?php foreach ($value['orders'] as $order) : ?>
+                                                                    <div class="border rounded p-2 mb-3" style="background-color: #fff;">
+                                                                        <!-- Đơn hàng -->
+
+                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                            <!-- Tên đơn hàng và trạng thái đơn hàng -->
+                                                                            <div>
+                                                                                <h5><b>Đơn hàng #<?= $order['order']['id'] ?></b></h5>
+                                                                            </div>
+                                                                            <div>
+                                                                                <h5 class="btn btn-success"><?= $value['status']['status_order_name'] ?></h5>
+                                                                            </div>
+                                                                            <!-- End tên đơn hàng -->
+                                                                        </div>
+                                                                        <hr class="custom-hr">
+                                                                        <?php foreach ($order['details'] as $detail) : ?>
+                                                                            <div class="row">
+                                                                                <!-- Sản phẩm -->
+                                                                                <div class="col-2">
+                                                                                    <img src="<?= BASE_URL . $detail['image'] ?>" class="border rounded" alt="">
+                                                                                </div>
+                                                                                <div class="col-8">
+                                                                                    <h5><?= $detail['product_name'] ?></h5>
+                                                                                    <p>Số lượng: <?= $detail['detail_quantity'] ?></p>
+                                                                                </div>
+                                                                                <div class="col-2 d-flex justify-content-between">
+                                                                                    <h5></h5>
+                                                                                    <h5 style="color: #dd0000;"><?= $detail['product_price'] ?> đ</h5>
+                                                                                </div>
+                                                                                <!-- End sản phẩm -->
+                                                                            </div>
+                                                                            <hr class="my-3 custom-hr">
+                                                                        <?php endforeach ?>
+                                                                        <div class="row">
+                                                                            <!-- Tổng tiền -->
+
+                                                                            <div class="col-12 d-flex justify-content-between align-items-center">
+                                                                                <div><a href="<?=BASE_URL.'?act=detail-order&id='.$order['order']['id']?>" class="btn btn-warning"> Xem chi tiết</a></div>
+                                                                                <div class="d-flex">
+                                                                                    <p class="m-0">Thành tiền:
+                                                                                    <h5 class="m-0" style="color: #dd0000;"> <?= $order['order']['total_money'] ?> đ</h5>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- End tổng tiền -->
+                                                                        </div>
+                                                                        <!-- End đơn hàng -->
+                                                                    </div>
+                                                                <?php endforeach ?>
+                                                                <!-- end content -->
                                                             </div>
                                                         <?php endforeach ?>
                                                     </div>

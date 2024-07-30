@@ -8,9 +8,9 @@ define('PATH_MODEL_ADMIN',__DIR__.'/../admin/models/');
 define('PATH_VIEW_ADMIN',__DIR__.'/../admin/views/');
 define('PATH_UPLOAFD',__DIR__. '/../');
 
-define('BASE_URL','http://localhost:8080/duan/');
-define('BASE_URL_AVATAR','http://localhost:8080/duan/uploads/avatar5.png');
-define('BASE_URL_ADMIN','http://localhost:8080/duan/admin/');
+define('BASE_URL','http://duan.test:8080/');
+define('BASE_URL_AVATAR','http://duan.test:8080/uploads/avatar5.png');
+define('BASE_URL_ADMIN','http://duan.test:8080/admin/');
 
 define('DB_HOST','localhost');
 define('DB_PORT','3006');

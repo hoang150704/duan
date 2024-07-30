@@ -33,7 +33,7 @@
         ]);
 
         var options = {
-          title: 'Doanh thu theo ngày',
+          title: 'Doanh thu theo tuần',
           hAxis: {title: 'Ngày',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };

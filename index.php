@@ -11,7 +11,8 @@ require __DIR__ ."/PHPMailer-master/src/SMTP.php";
 require __DIR__ .'/PHPMailer-master/src/Exception.php';
 require_file(PATH_CONTROLLER);
 require_file(PATH_MODEL);
-
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 // Điều hướng
 $act=$_GET['act'] ?? '/';
@@ -25,7 +26,7 @@ match ($act) {
     'signup'=>signupUser(),
     // Thông tin khách hàng
     'info'=>infoUser(),
-    'order'=>orderOfUser(),
+    'detail-order'=>detailOrder($_GET['id']),
     // Đổi thông tin
     'change-password'=>changePassword(),
     'change-password-success'=>changePasswordSuccess(),
@@ -43,9 +44,11 @@ match ($act) {
     'cart'=>cartView(),
     // Đơn hàng
     'checkout'=>checkoutOrder(),
-    'success'=>successOrder(),
-
+    'success'=>successOrder($_GET['id'],$_GET['check']),
     // 
+    'search'=>search(),
+    // Nếu không
+    default => err()
 
 };
 

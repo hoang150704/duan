@@ -52,9 +52,15 @@
                         <hr class="mb-4">
                         <h4>Phương thức thanh toán</h4>
                         <div class="form-check m-2">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <input class="form-check-input" type="radio" name="payment" id="exampleRadios1" value="0" checked>
                             <label class="form-check-label" for="exampleRadios1">
                                 Thanh toán khi nhận hàng
+                            </label>
+                        </div>
+                        <div class="form-check m-2">
+                            <input class="form-check-input" type="radio" name="payment" id="exampleRadios1" value="1" checked>
+                            <label class="form-check-label" for="exampleRadios1">
+                                Thanh toán online
                             </label>
                         </div>
                         <hr class="mb-4">

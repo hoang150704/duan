@@ -4,8 +4,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-4">
                     <div class="search_bar">
-                        <form action="#">
-                            <input placeholder="Bạn cần tìm gì ..." type="text">
+                        <form action="index.php?act='?act=search'" method="get">
+                            <input placeholder="Bạn cần tìm gì ..." type="text" name="query">
                             <button type="submit"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>

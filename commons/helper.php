@@ -109,7 +109,9 @@ if (!function_exists('checkLoginRequired')) {
             'update-user',
             'change-email',
             'success-change-email',
-            'err-email'
+            'err-email',
+            'detail-order'
+
         ];
 
         if (in_array($act, $protectedActions)) {
